@@ -12,6 +12,10 @@ body {
   box-sizing: border-box;
 }
 
+select {
+  -webkit-appearance: none;
+}
+
 form input:-webkit-autofill,
 form:-webkit-autofill,
 .form select:-webkit-autofill {
@@ -112,4 +116,8 @@ form:-webkit-autofill,
 .form__row:last-child > .field {
   border-bottom: 0;
   padding-bottom 16px;
+}
+
+#map {
+  height: 350px;
 }

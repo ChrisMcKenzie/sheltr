@@ -89,10 +89,48 @@
               <input class="field__input" type="number" id="children" max="10">
             </div>
           </div>
+          <h2 class="form__title">Smoking & Drinking</h2>
           <div class="form__row">
             <div class="field flex">
-              <label class="field__label" for="children">Children</label>
-              <input class="field__input" type="number" id="children" max="10">
+              <label class="field__label" for="smoker">Tobacco</label>
+              <input class="field__input" type="checkbox" id="smoker">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="smoker">Marijuana</label>
+              <input class="field__input" type="checkbox" id="smoker">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="smoker">Preference</label>
+              <select class="field__input">
+                <option></option>
+                <option value="inside">Inside</option>
+                <option value="outside">Outside</option>
+              </select>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="drinking">Drinking</label>
+              <input class="field__input" type="checkbox" id="drinking">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="drinking_freq">Frequency</label>
+              <select class="field__input" data-bound-to-checkbox="drinking">
+                <option></option>
+                <option value="occasional">Occasional</option>
+                <option value="everyday">Everyday</option>
+              </select>
+            </div>
+          </div>
+          <h2 class="form__title">Pets</h2>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="pets">Do you have pets?</label>
+              <input class="field__input" type="checkbox" id="pets">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="pets_count">How Many?</label>
+              <input class="field__input" type="number" min="0" data-bound-to-checkbox="pets">
             </div>
           </div>
           <h2 class="form__title">Previous Addresses</h2>
@@ -107,7 +145,7 @@
             </div>
             <div class="field flex">
               <label class="field__label" for="state">State</label>
-              <input class="field__input" type="text" id="state">
+              <input class="field__input" type="text" list="states" maxlength="2" id="state">
             </div>
             <div class="field flex">
               <label class="field__label" for="zip">Zip</label>
@@ -125,7 +163,7 @@
             </div>
             <div class="field flex">
               <label class="field__label" for="state">State</label>
-              <input class="field__input" type="text" id="state">
+              <input class="field__input" type="text" list="states" maxlength="2" id="state">
             </div>
             <div class="field flex">
               <label class="field__label" for="zip">Zip</label>
@@ -143,7 +181,7 @@
             </div>
             <div class="field flex">
               <label class="field__label" for="state">State</label>
-              <input class="field__input" type="text" id="state" maxlength="2">
+              <input class="field__input" type="text" maxlength="2" id="state">
             </div>
             <div class="field flex">
               <label class="field__label" for="zip">Zip</label>
@@ -174,24 +212,195 @@
               </select>
             </div>
           </div>
+          <h2 class="form__title">Housing Provider Preferences</h2>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="income_source">Gender</label>
+              <select class="field__input" id="income_source">
+                <option>--</option>
+                <option value="any">Any</option>
+                <option value="inside">Male</option>
+                <option value="outside">Female</option>
+              </select>
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="income_source">Drinking</label>
+              <select class="field__input" id="income_source">
+                <option>--</option>
+                <option value="any">Any</option>
+                <option value="inside">Occasional</option>
+                <option value="outside">Everyday</option>
+                <option value="outside">None</option>
+              </select>
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="income_source">Smoking</label>
+              <select class="field__input" id="income_source">
+                <option>--</option>
+                <option value="any">Any</option>
+                <option value="inside">Inside</option>
+                <option value="outside">Outside</option>
+                <option value="no">None</option>
+              </select>
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="income_source">Pets</label>
+              <select class="field__input" id="income_source">
+                <option>--</option>
+                <option value="any">Any</option>
+                <option value="inside">Inside</option>
+                <option value="outside">Outside</option>
+                <option value="no">None</option>
+              </select>
+            </div>
+          </div>
+          <h2 class="form__title">Housing Preferences</h2>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="roomates">Housing Type</label>
+              <select class="field__input" id="roomates">
+                <option>--</option>
+                <option value="true">House</option>
+                <option value="false">Apartment</option>
+              </select>
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="roomates">Are you ok with Roomates?</label>
+              <select class="field__input" id="roomates">
+                <option>--</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="roomates">Public Transportation Nearby</label>
+              <input class="field__input" type="checkbox" id="roomates">
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="roomates">Do you mind stairs?</label>
+              <input class="field__input" type="checkbox" id="roomates">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="roomates">Do you require special accessiblity? (Wheelchair)</label>
+              <input class="field__input" type="checkbox" id="roomates">
+            </div>
+          </div>
+          <h2 class="form__title">Location</h2>
+          <div class="form__row">
+            <div id="map" class="flex"></div>
+            <div class="vertical layout flex">
+              <div class="form__row">
+                <div class="field flex">
+                  <label class="field__label" for="location_city">City</label>
+                  <input class="field__input" type="text">
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="field flex">
+                  <label class="field__label" for="location_city">State</label>
+                  <input class="field__input" type="text">
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="field flex">
+                  <label class="field__label" for="location_city">Range</label>
+                  <input class="field__input" type="text">
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
-        <script>
-          var inputs = document.querySelectorAll('.field__input');
-
-          Array.prototype.forEach.call(inputs, function(input){
-            input.addEventListener('focus', function(){
-              input.parentElement.classList.add('focus')
-            });
-            input.addEventListener('blur', function(){
-              input.parentElement.classList.remove('focus')
-            });
-          });
-        </script>
       </main>
     </div>
+    <datalist id="states">
+      <option value="AL">
+      <option value="AK">
+      <option value="AZ">
+      <option value="AR">
+      <option value="CA">
+      <option value="CO">
+      <option value="CT">
+      <option value="DE">
+      <option value="FL">
+      <option value="GA">
+      <option value="HI">
+      <option value="ID">
+      <option value="IL">
+      <option value="IN">
+      <option value="IA">
+      <option value="KS">
+      <option value="KY">
+      <option value="LA">
+      <option value="ME">
+      <option value="MD">
+      <option value="MA">
+      <option value="MI">
+      <option value="MN">
+      <option value="MS">
+      <option value="MO">
+      <option value="MT">
+      <option value="NE">
+      <option value="NV">
+      <option value="NH">
+      <option value="NJ">
+      <option value="NM">
+      <option value="NY">
+      <option value="NC">
+      <option value="ND">
+      <option value="OH">
+      <option value="OK">
+      <option value="OR">
+      <option value="PA">
+      <option value="RI">
+      <option value="SC">
+      <option value="SD">
+      <option value="TN">
+      <option value="TX">
+      <option value="UT">
+      <option value="VT">
+      <option value="VA">
+      <option value="WA">
+      <option value="WV">
+      <option value="WI">
+      <option value="WY">
+    </datalist>
+    <script>
+      var inputs = document.querySelectorAll('.field__input');
 
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="/scripts/app.js"></script>
+      Array.prototype.forEach.call(inputs, function(input){
+        if(input.dataset.boundToCheckbox) {
+          var bindings = input.dataset.boundToCheckbox.split(' ')
+          bindings.forEach(function(row){
+            var boundInput = document.querySelector('#' + row);
+            input.addEventListener('change', function(){
+              if(input.value !== '' && input.value !== '0') {
+                boundInput.checked = true;
+              } else {
+                boundInput.checked = false;
+              }
+            });
+          })
+        }
+
+        input.addEventListener('focus', function(){
+          input.parentElement.classList.add('focus')
+        });
+        input.addEventListener('blur', function(){
+          input.parentElement.classList.remove('focus')
+        });
+      });
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBs06pO9IMwS5dJ6iK2p7S_FIeB3Ss7X-0&callback=initMap"></script>
   </body>
 </html>
