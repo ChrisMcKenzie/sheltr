@@ -1,0 +1,82 @@
+{
+  "created": "<datetime>",
+  "updated": "<datetime>",
+  "name": {
+    "first": "Chris",
+    "last": "McKenzie",
+    "other": [
+      "maiden/other"
+    ]
+  },
+  "dob": "<datetime>",
+  "sex": "male",
+  "ethnicity": "caucasian",
+  "email": "theunilife@gmail.com",
+  "phone": [
+    "760-596-8806"
+  ],
+  "emergency_contact": {
+    "name": "Vanessa McKenzie",
+    "phone": "7609639663"
+  },
+  "addys": [
+    "6526 Friars rd Apt 201, San Diego CA 92108"
+  ],
+  "income": {
+    "value": "1000000",
+    "source": "job"
+  },
+  "children": {
+    "number": 1,
+    "ages": [1]
+  },
+  "life_style": {
+    "smoker": {
+      "type": [],
+      "inside": false
+    },
+    "alcohol": "occasional",
+    "pets": []
+  },
+  "desires": {
+    "gender": "any",
+    "smoking": "outside",
+    "drinking": "occasional",
+    "pets": "any",
+    "children": "any",
+    "location": "<geolocation>",
+    "roommates": false,
+    "housing":{
+      "type": "house",
+      "stairs": true,
+      "accesible": true,
+      "transportation": true
+    } 
+  },
+  "provides": {
+    "transportation": {
+      "willing": true,
+      "own_car": true,
+      "valid_license": true,
+      "insured": true
+    },
+    "cooking": false,
+    "housekeeping": true,
+    "laundry": false,
+    "yardwork": true,
+    "companionship": true,
+    "babysitting": true,
+    "other": false,
+    "availability": {
+      "weekends": true,
+      "weekdays": false,
+      "nights": true,
+      "evenings": true
+    }
+  },
+  "rent": {
+    "value": 1600,
+    "with_service": 1000
+  },
+  "comments": ""
+}

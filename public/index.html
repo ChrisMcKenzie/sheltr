@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sheltrApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheltr</title>
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Web Starter Kit">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <meta name="theme-color" content="#3372DF">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/layout.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <header class="title">
+        <h2>Sheltr</h2>
+      </header>
+
+      <main class="content">
+        <form class="vertical layout">
+          <h2 class="form__title">Basic Information</h2>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="fname">First Name</label>
+              <input class="field__input" type="text" id="fname">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="lname">Last Name</label>
+              <input class="field__input" type="text" id="lname">
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="email">email</label>
+              <input class="field__input" type="email" id="email">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="phone">phone</label>
+              <input class="field__input" type="tel" id="phone">
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="dob">Date of Birth</label>
+              <input class="field__input" type="date" id="dob">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="sex">Sex</label>
+              <select class="field__input" id="sex">
+                <option></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="ethnicity">Ethnicity</label>
+              <select class="field__input" id="ethnicity">
+                <option></option>
+                <option value="native-american">Native American</option>
+                <option value="caucasian">Caucasian</option>
+                <option value="african-american">African American</option>
+                <option value="asian">Asian</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="children">Children</label>
+              <input class="field__input" type="number" id="children" max="10">
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="children">Children</label>
+              <input class="field__input" type="number" id="children" max="10">
+            </div>
+          </div>
+          <h2 class="form__title">Previous Addresses</h2>
+          <div class="form__row">
+            <div class="field flex-5">
+              <label class="field__label" for="address">Address</label>
+              <input class="field__input" type="text" id="address">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="city">City</label>
+              <input class="field__input" type="text" id="city">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="state">State</label>
+              <input class="field__input" type="text" id="state">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="zip">Zip</label>
+              <input class="field__input" type="text" id="zip">
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field flex-5">
+              <label class="field__label" for="address">Address</label>
+              <input class="field__input" type="text" id="address">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="city">City</label>
+              <input class="field__input" type="text" id="city">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="state">State</label>
+              <input class="field__input" type="text" id="state">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="zip">Zip</label>
+              <input class="field__input" type="text" id="zip">
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field flex-5">
+              <label class="field__label" for="address">Address</label>
+              <input class="field__input" type="text" id="address">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="city">City</label>
+              <input class="field__input" type="text" id="city">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="state">State</label>
+              <input class="field__input" type="text" id="state" maxlength="2">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="zip">Zip</label>
+              <input class="field__input" type="text" id="zip">
+            </div>
+          </div>
+          <h2 class="form__title">Emergency Contact</h2>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="emergency_name">Name</label>
+              <input class="field__input" type="text" id="emergency_name">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="emergency_phone">phone</label>
+              <input class="field__input" type="tel" id="emergency_phone">
+            </div>
+          </div>
+          <h2 class="form__title">Income</h2>
+          <div class="form__row">
+            <div class="field flex">
+              <label class="field__label" for="income_amount">amount</label>
+              <input class="field__input" type="number" id="income_amount">
+            </div>
+            <div class="field flex">
+              <label class="field__label" for="income_source">source</label>
+              <select class="field__input" id="income_source">
+                <option value="job">Job</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <script>
+          var inputs = document.querySelectorAll('.field__input');
+
+          Array.prototype.forEach.call(inputs, function(input){
+            input.addEventListener('focus', function(){
+              input.parentElement.classList.add('focus')
+            });
+            input.addEventListener('blur', function(){
+              input.parentElement.classList.remove('focus')
+            });
+          });
+        </script>
+      </main>
+    </div>
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/scripts/app.js"></script>
+  </body>
+</html>
