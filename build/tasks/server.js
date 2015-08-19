@@ -51,7 +51,7 @@ gulp.task('server:nodemon', function(cb){
   var started = false;
 
   return $.nodemon({
-    script: SHELTR.distDir + '/bin/www',
+    script: SHELTR.distDir + '/app.js',
     tasks: ['server:compile', 'server:copy'],
     watch: [SHELTR.srcDir + '/**/*']
   }).on('start', function(){
@@ -64,9 +64,8 @@ gulp.task('server:nodemon', function(cb){
 
 function build(done){
   return gulp.src([
-      SHELTR.srcDir + '/collections/*.js',
-      SHELTR.srcDir + '/routes/*.js',
-      SHELTR.srcDir + '/*.js'
+      SHELTR.srcDir + '/src/**/*.js',
+      SHELTR.srcDir + '/app.js'
     ], { base: '.' })
     .pipe($.sourcemaps.init())
     .pipe($.babel())

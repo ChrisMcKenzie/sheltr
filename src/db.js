@@ -2,8 +2,8 @@ var r = require('rethinkdb');
 var config = require(__dirname + '/config');
 var util = require('util');
 var assert = require('assert');
-var logdebug = require('debug')('app:rdb:debug');
-var logerror = require('debug')('app:rdb:error');
+var logdebug = require('debug')('sheltr:rdb:debug');
+var logerror = require('debug')('sheltr:rdb:error');
 
 export function connect(hollaback){
   r.connect({
@@ -21,7 +21,7 @@ export function connect(hollaback){
   });
 }
 
-export function setup() {
+export function setup(cb) {
   connect(function (err, connection) {
     assert.ok(err === null, err);
     r.dbCreate(config.db.name).run(connection, function(err, result) {
@@ -66,6 +66,8 @@ export function setup() {
           });
         })(tbl);
       }
+
+      if(cb) cb();
     });
   });
 };

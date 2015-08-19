@@ -4,9 +4,6 @@
 import r from 'rethinkdb'
 import debug from 'debug'
 
-let logdebug = debug('app:collection:debug');
-let logerror = debug('app:collection:error');
-
 /**
  *  Run Handlers
  *
@@ -16,18 +13,15 @@ let logerror = debug('app:collection:error');
  */
 let _handler = function(hollaback){
   return function(err, cursor){
-    if(err){
-      return hollaback(err);
+    if(err) return hollaback(err);
+
+    if ('function' === typeof cursor.toArray) {
+      cursor.toArray(function(err, results){
+        if(err) return hollaback(err);
+        hollaback(null, results);
+      });
     } else {
-      if ('function' === typeof cursor.toArray) {
-        cursor.toArray(function(err, results){
-          console.log(err, results)
-          if(err) return hollaback(err);
-          hollaback(null, results);
-        });
-      } else {
-        hollaback(null, cursor);
-      }
+      hollaback(null, cursor);
     }
   };
 };
@@ -49,6 +43,10 @@ export default class Collection {
     this._table = table;
     this._r = r;
     this.q = r.table(table);
+    this.log = {
+      error: debug('sheltr:collection:' + table + ':error'),
+      debug: debug('sheltr:collection:' + table + ':debug')
+    }
   }
   /**
    * Base query builder
@@ -64,7 +62,7 @@ export default class Collection {
       if('function' === typeof mixin){
         query = mixin(query);
       } else {
-        logerror('[WARN ] mixin must be function');
+        this.log.error('[ERROR ] mixin must be function');
       }
     });
 
@@ -74,6 +72,10 @@ export default class Collection {
       }
     }
   }
+  // alias to query
+  getAll() {
+    return this.query.apply(this, arguments);
+  }
   /**
    *  Get Record by Id
    *
@@ -82,9 +84,26 @@ export default class Collection {
    *  @param { string } id - Id of the record to get
    *  @return { Object }
    */
-  getById(id){
+  getById(id) {
     return this.query(function(q){
       return q.get(id)
+    });
+  }
+
+  /**
+   *  Insert the given record
+   *
+   *  builds a `r.table(<table-name>).insert(<data>)` query
+   *
+   *  @param { Object } data - The data to be inserted
+   *  @return { Object }
+   */
+  insert(data) {
+    // TODO(ChrisMcKenzie): validate based on json schema
+    // if it has been set.
+
+    return this.query(function(q){
+      return q.insert(data);
     });
   }
 }

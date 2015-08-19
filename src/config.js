@@ -3,11 +3,11 @@
 export default {
   env: process.env.NODE_ENV || 'development',
   db: {
-    host: process.env.RDB_HOST || 'localhost',
-    port: parseInt(process.env.RDB_PORT) || 28015,
+    host: process.env.RETHINKDB_PORT_28015_TCP_ADDR || 'localhost',
+    port: parseInt(process.env.RETHINKDB_PORT_28015_TCP_PORT) || 28015,
     name: process.env.RDB_DB || 'sheltr',
     tables: {
-      'people': {
+      'applicants': {
         primary: 'id'
       },
       'users': {
