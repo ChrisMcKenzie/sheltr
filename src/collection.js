@@ -1,8 +1,8 @@
 /**
  * @module collections/collection
  */
-import r from 'rethinkdb'
-import debug from 'debug'
+import r from 'rethinkdb';
+import debug from 'debug';
 
 /**
  *  Run Handlers
@@ -13,11 +13,11 @@ import debug from 'debug'
  */
 let _handler = function(hollaback){
   return function(err, cursor){
-    if(err) return hollaback(err);
+    if(err) { return hollaback(err); }
 
     if ('function' === typeof cursor.toArray) {
       cursor.toArray(function(err, results){
-        if(err) return hollaback(err);
+        if(err) { return hollaback(err); }
         hollaback(null, results);
       });
     } else {
@@ -46,7 +46,7 @@ export default class Collection {
     this.log = {
       error: debug('sheltr:collection:' + table + ':error'),
       debug: debug('sheltr:collection:' + table + ':debug')
-    }
+    };
   }
   /**
    * Base query builder
@@ -70,7 +70,7 @@ export default class Collection {
       run: function(conn, hollaback){
         return query.run(conn, _handler(hollaback));
       }
-    }
+    };
   }
   // alias to query
   getAll() {
@@ -86,7 +86,7 @@ export default class Collection {
    */
   getById(id) {
     return this.query(function(q){
-      return q.get(id)
+      return q.get(id);
     });
   }
 

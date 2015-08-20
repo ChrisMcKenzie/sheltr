@@ -1,7 +1,8 @@
-var r = require('rethinkdb');
-var config = require(__dirname + '/config');
-var util = require('util');
-var assert = require('assert');
+import r from 'rethinkdb';
+import config from './config';
+import util from 'util';
+import assert from 'assert';
+
 var logdebug = require('debug')('sheltr:rdb:debug');
 var logerror = require('debug')('sheltr:rdb:error');
 
@@ -15,7 +16,7 @@ export function connect(hollaback){
       logerror('[ERROR] RethinkDB database is not available');
       hollaback(err);
     } else {
-      logdebug('[INFO ] RethinkDB is connected')
+      logdebug('[INFO ] RethinkDB is connected');
       hollaback(err, result);
     }
   });
@@ -23,54 +24,59 @@ export function connect(hollaback){
 
 export function setup(cb) {
   connect(function (err, connection) {
+    function createTable(tbl) {
+      var primary = config.db.tables[tbl];
+      var secondary;
+
+      function createIndex(indexName){
+        r.db(config.db.name).table(tbl).indexCreate(indexName, secondary[indexName]).run(connection, function(err, result){
+          if(err) {
+            logdebug('[DEBUG] RethinkDB table index "%s" already exists (%s:%s)\n%s', idx, err.name, err.msg, err.message);
+          }
+          else {
+            logdebug('[INFO ] RethinkDB table index "%s" created', idx);
+          }
+        });
+      }
+
+      if(typeof config.db.tables[tbl] === 'object') {
+        primary = config.db.tables[tbl].primary || 'id';
+        secondary = config.db.tables[tbl].secondary || null;
+      }
+
+      r.db(config.db.name).tableCreate(tbl, {primaryKey: primary}).run(connection, function(err, result) {
+        if(err) {
+          logdebug('[DEBUG] RethinkDB table "%s" already exists (%s:%s)\n%s', tbl, err.name, err.msg, err.message);
+        }
+        else {
+          logdebug('[INFO ] RethinkDB table "%s" created', tbl);
+        }
+
+        if(secondary !== null) {
+          for(var idx in secondary){
+            createIndex(idx);
+          }
+        }
+      });
+    }
+
     assert.ok(err === null, err);
     r.dbCreate(config.db.name).run(connection, function(err, result) {
       if(err) {
-        logdebug("[DEBUG] RethinkDB database '%s' already exists (%s:%s)\n%s", config.db.name, err.name, err.msg, err.message);
+        logdebug('[DEBUG] RethinkDB database "%s" already exists (%s:%s)\n%s', config.db.name, err.name, err.msg, err.message);
       }
       else {
-        logdebug("[INFO ] RethinkDB database '%s' created", config.db.name);
+        logdebug('[INFO ] RethinkDB database "%s" created', config.db.name);
       }
 
       for(var tbl in config.db.tables) {
-        (function (tableName) {
-          var primary = config.db.tables[tbl];
-          var secondary;
-          if(typeof config.db.tables[tbl] == 'object') {
-            primary = config.db.tables[tbl].primary || 'id'
-            secondary = config.db.tables[tbl].secondary || null
-          }
-
-          r.db(config.db.name).tableCreate(tableName, {primaryKey: primary}).run(connection, function(err, result) {
-            if(err) {
-              logdebug("[DEBUG] RethinkDB table '%s' already exists (%s:%s)\n%s", tableName, err.name, err.msg, err.message);
-            }
-            else {
-              logdebug("[INFO ] RethinkDB table '%s' created", tableName);
-            }
-
-            if(secondary !== null) {
-              for(var idx in secondary){
-                (function(indexName){
-                  r.db(config.db.name).table(tableName).indexCreate(indexName, secondary[indexName]).run(connection, function(err, result){
-                    if(err) {
-                      logdebug("[DEBUG] RethinkDB table index '%s' already exists (%s:%s)\n%s", idx, err.name, err.msg, err.message);
-                    }
-                    else {
-                      logdebug("[INFO ] RethinkDB table index '%s' created", idx);
-                    }
-                  });
-                })(idx)
-              };
-            }
-          });
-        })(tbl);
+        createTable(tbl);
       }
 
-      if(cb) cb();
+      if(cb) { cb(); }
     });
   });
-};
+}
 
 export function open(req, res, next) {
   connect(function(error, conn) {

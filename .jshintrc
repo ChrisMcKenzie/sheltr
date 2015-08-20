@@ -11,10 +11,6 @@
   "noarg": true,
   "quotmark": "single",
   "globals": {
-    "wrap": true,
-    "unwrap": true,
-    "page": true,
-    "app": true,
-    "importScripts": true
+    "angular": true
   }
 }

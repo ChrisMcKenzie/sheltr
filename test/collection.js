@@ -1,8 +1,7 @@
 import assert from 'assert';
-import Collection from '../collections/collection.js'
-var db = require('../db')
+import Collection from '../collections/collection.js';
+import db from '../db';
 
-let _dbConn;
 let _collection;
 
 describe('Collection', function() {

@@ -1,7 +1,7 @@
 {
   "name": "sheltr",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "GPLv2",
   "ignore": [
     "**/.*",
     "node_modules",

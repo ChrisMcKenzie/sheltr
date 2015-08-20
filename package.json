@@ -29,6 +29,7 @@
     "gulp-chmod": "^1.2.0",
     "gulp-load-plugins": "^1.0.0-rc.1",
     "gulp-nodemon": "^2.0.3",
+    "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
     "mocha": "^2.2.5",
     "require-dir": "^0.3.0",

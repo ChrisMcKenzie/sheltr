@@ -39,9 +39,6 @@ form:-webkit-autofill,
 .content {
   background-color: #fff;
   box-shadow: rgba(0,0,0, 0.5) 0 1px 1px;
-  padding: 16px;
-
-  min-height: 400px;
 }
 
 /* FORM  */
@@ -115,7 +112,7 @@ form:-webkit-autofill,
 
 .form__row:last-child > .field {
   border-bottom: 0;
-  padding-bottom 16px;
+  padding-bottom: 16px;
 }
 
 #map {
