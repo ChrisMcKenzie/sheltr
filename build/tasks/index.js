@@ -14,6 +14,15 @@ gulp.task('default', function(done){
   );
 });
 
+gulp.task('dist', function(done){
+  runSequence(
+    'server:compile',
+    ['frontend:copy', 'frontend:sass'],
+    'docker:build',
+    done
+  );
+});
+
 gulp.task('serve', function(done){
   runSequence(
     'server:compile',
@@ -22,6 +31,7 @@ gulp.task('serve', function(done){
     done
   );
 
+  gulp.watch(SHELTR.srcDir + '/public/styles/*.scss', 'frontend:sass');
   gulp.watch([
       SHELTR.srcDir + '/public/**/*'
     ], [

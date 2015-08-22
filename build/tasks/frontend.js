@@ -8,13 +8,11 @@ var browserSync = require('browser-sync').create();
 var SHELTR = require(__base + '/package.json').sheltr;
 
 gulp.task('frontend:sass', function () {
-  gulp.src(SHELTR.srcDir + '/public/styles/**/*.scss')
+  return gulp.src(SHELTR.srcDir + '/public/styles/**/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(SHELTR.distDir + '/public/styles'));
-
-  gulp.watch(SHELTR.srcDir + '/public/styles/*.scss');
 });
 
 gulp.task('frontend:copy', function(){

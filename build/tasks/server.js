@@ -8,7 +8,7 @@ var browserSync = require('browser-sync').create();
 var SHELTR = require(__base + '/package.json').sheltr;
 var path = require('path');
 
-gulp.task('server:compile', function (done) {
+gulp.task('server:compile', function () {
   return gulp.src([
       SHELTR.srcDir + '/src/**/*.js',
       SHELTR.srcDir + '/app.js'
