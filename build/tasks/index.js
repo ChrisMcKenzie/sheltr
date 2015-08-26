@@ -17,7 +17,7 @@ gulp.task('default', function(done){
 gulp.task('dist', function(done){
   runSequence(
     'server:compile',
-    ['frontend:copy', 'frontend:sass'],
+    ['frontend:copy', 'frontend:sass', 'frontend:browserify'],
     'docker:build',
     done
   );
@@ -26,17 +26,17 @@ gulp.task('dist', function(done){
 gulp.task('serve', function(done){
   runSequence(
     'server:compile',
-    ['frontend:copy', 'frontend:sass'],
+    ['frontend:copy', 'frontend:sass', 'frontend:browserify'],
     'server:serve',
     done
   );
 
-  gulp.watch(SHELTR.srcDir + '/public/styles/*.scss', 'frontend:sass');
   gulp.watch([
       SHELTR.srcDir + '/public/**/*'
     ], [
       'frontend:copy',
-      'frontend:sass'
+      'frontend:sass',
+      'frontend:browserify'
     ],
     browserSync.reload
   );

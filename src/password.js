@@ -1,8 +1,9 @@
 'use strict';
+import {fork} from 'child-process';
+
 // taken from https://github.com/NodeBB/NodeBB/blob/master/src/password.js
 // because it's awesome;
 (function(module) {
-	var fork = require('child_process').fork;
 
 	module.hash = function(rounds, password, callback) {
 		forkChild({type: 'hash', rounds: rounds, password: password}, callback);
