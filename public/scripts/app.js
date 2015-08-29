@@ -1,8 +1,12 @@
 'use strict';
 var angular = require('angular');
-require('angular-ui-router');
+var satellizer = require('satellizer');
 
-angular.module('sheltrApp', [require('angular-ui-router')])
+angular.module('sheltrApp', [
+  require('angular-ui-router'),
+  require('./controllers'),
+  'satellizer'
+])
   .run([
     '$rootScope',
     '$state',
@@ -15,9 +19,12 @@ angular.module('sheltrApp', [require('angular-ui-router')])
   .config([
     '$stateProvider',
     '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider){
+    '$authProvider',
+    function($stateProvider, $urlRouterProvider, $authProvider){
 
     $urlRouterProvider.otherwise('/');
+
+    $authProvider.loginUrl = '/api/authenticate';
 
     $stateProvider
       .state('signup', {
@@ -25,21 +32,10 @@ angular.module('sheltrApp', [require('angular-ui-router')])
         templateUrl: 'views/signup.form.html',
         controller: 'SignupController'
       })
-      .state('about', {
-          url: '/about',
 
-          // Showing off how you could return a promise from templateProvider
-          templateProvider: ['$timeout',
-            function (        $timeout) {
-              return $timeout(function () {
-                return '<p class="lead">UI-Router Resources</p><ul>' +
-                         '<li><a href="https://github.com/angular-ui/ui-router/tree/master/sample">Source for this Sample</a></li>' +
-                         '<li><a href="https://github.com/angular-ui/ui-router">Github Main Page</a></li>' +
-                         '<li><a href="https://github.com/angular-ui/ui-router#quick-start">Quick Start</a></li>' +
-                         '<li><a href="https://github.com/angular-ui/ui-router/wiki">In-Depth Guide</a></li>' +
-                         '<li><a href="https://github.com/angular-ui/ui-router/wiki/Quick-Reference">API Reference</a></li>' +
-                       '</ul>';
-              }, 100);
-            }]
-        });
+      .state('home', {
+        url: '/',
+        templateUrl: 'views/home.html',
+        controller: 'HomeController'
+      });
   }]);

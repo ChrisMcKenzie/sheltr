@@ -11,13 +11,13 @@ import debug from 'debug';
  *
  *  @private
  */
-let _handler = function(hollaback){
-  return function(err, cursor){
-    if(err) { return hollaback(err); }
+let _handler = function(hollaback) {
+  return function(err, cursor) {
+    if (err) return hollaback(err);
 
     if ('function' === typeof cursor.toArray) {
-      cursor.toArray(function(err, results){
-        if(err) { return hollaback(err); }
+      cursor.toArray(function(err, results) {
+        if (err) return hollaback(err);
         hollaback(null, results);
       });
     } else {
@@ -39,13 +39,13 @@ export default class Collection {
    * @param {string} table - The table that this collection
    * should use.
    */
-  constructor(table){
+  constructor(table) {
     this._table = table;
     this._r = r;
     this.q = r.table(table);
     this.log = {
       error: debug('sheltr:collection:' + table + ':error'),
-      debug: debug('sheltr:collection:' + table + ':debug')
+      debug: debug('sheltr:collection:' + table + ':debug'),
     };
   }
   /**
@@ -56,10 +56,10 @@ export default class Collection {
    *
    * @return { Object }
    */
-  query(...mixins){
+  query(...mixins) {
     var query = this.q;
-    mixins.forEach(function(mixin){
-      if('function' === typeof mixin){
+    mixins.forEach(function(mixin) {
+      if ('function' === typeof mixin) {
         query = mixin(query);
       } else {
         this.log.error('[ERROR ] mixin must be function');
@@ -67,12 +67,12 @@ export default class Collection {
     });
 
     return {
-      run: function(conn, hollaback){
+      run: function(conn, hollaback) {
         return query.run(conn, _handler(hollaback));
-      }
+      },
     };
   }
-  // alias to query
+  // Alias to query
   getAll() {
     return this.query.apply(this, arguments);
   }
@@ -85,7 +85,7 @@ export default class Collection {
    *  @return { Object }
    */
   getById(id) {
-    return this.query(function(q){
+    return this.query(function(q) {
       return q.get(id);
     });
   }
@@ -102,7 +102,7 @@ export default class Collection {
     // TODO(ChrisMcKenzie): validate based on json schema
     // if it has been set.
 
-    return this.query(function(q){
+    return this.query(function(q) {
       return q.insert(data);
     });
   }

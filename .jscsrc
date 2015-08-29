@@ -1,5 +1,15 @@
 {
-  "preset": "google",
+  "preset": "node-style-guide",
   "disallowSpacesInAnonymousFunctionExpression": null,
-  "excludeFiles": ["node_modules/**"]
+  "excludeFiles": ["node_modules/**"],
+  "requireCurlyBraces": [
+      "else",
+      "for",
+      "while",
+      "do",
+      "try",
+      "catch",
+      "case",
+      "default"
+  ]
 }

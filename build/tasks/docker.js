@@ -5,13 +5,8 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var SHELTR = require(__base + '/package.json').sheltr;
 
-gulp.task('docker:build', ['docker:copy'], $.shell.task([
+gulp.task('docker:build', $.shell.task([
   'docker build -t sheltr .'
 ], {
-  cwd: SHELTR.distDir
+  cwd: SHELTR.srcDir
 }));
-
-gulp.task('docker:copy', function(){
-  return gulp.src(['./build/files/Dockerfile', 'package.json'])
-          .pipe(gulp.dest(SHELTR.distDir));
-});

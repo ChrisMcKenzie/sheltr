@@ -11,7 +11,7 @@ var glob = require('glob');
 var SHELTR = require(__base + '/package.json').sheltr;
 
 gulp.task('frontend:browserify', function(cb) {
-  glob(SHELTR.srcDir + '/public/scripts/**/*.js', {}, function (err, files) {
+  glob(SHELTR.srcDir + '/public/scripts/app.js', {}, function (err, files) {
     var b = browserify();
     files.forEach(function (file) {
       b.add(file);
