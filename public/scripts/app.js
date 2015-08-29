@@ -5,7 +5,7 @@ var satellizer = require('satellizer');
 angular.module('sheltrApp', [
   require('angular-ui-router'),
   require('./controllers'),
-  'satellizer'
+  'satellizer',
 ])
   .run([
     '$rootScope',
@@ -14,28 +14,28 @@ angular.module('sheltrApp', [
     function($rootScope, $state, $stateParams) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
-    }
+    },
   ])
   .config([
     '$stateProvider',
     '$urlRouterProvider',
     '$authProvider',
-    function($stateProvider, $urlRouterProvider, $authProvider){
+    function($stateProvider, $urlRouterProvider, $authProvider) {
+      $urlRouterProvider.otherwise('/');
 
-    $urlRouterProvider.otherwise('/');
+      $authProvider.loginUrl = '/api/authenticate';
 
-    $authProvider.loginUrl = '/api/authenticate';
+      $stateProvider
+        .state('signup', {
+          url: '/signup/:type',
+          templateUrl: 'views/signup.form.html',
+          controller: 'SignupController',
+        })
 
-    $stateProvider
-      .state('signup', {
-        url: '/signup/:type',
-        templateUrl: 'views/signup.form.html',
-        controller: 'SignupController'
-      })
-
-      .state('home', {
-        url: '/',
-        templateUrl: 'views/home.html',
-        controller: 'HomeController'
-      });
-  }]);
+        .state('home', {
+          url: '/',
+          templateUrl: 'views/home.html',
+          controller: 'HomeController',
+        });
+    },
+  ]);

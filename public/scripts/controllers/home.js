@@ -3,9 +3,11 @@
 var MODULE = 'sheltr.controllers.home';
 
 angular.module(MODULE, [])
-  .controller('HomeController', [function(){
+  .controller('HomeController', [
+    function() {
 
-  }]);
+    },
+  ]);
 
 module.exports = MODULE;
 

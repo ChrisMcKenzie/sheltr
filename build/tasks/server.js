@@ -1,5 +1,4 @@
 'use strict';
-/* globals __base, $ */
 
 var gulp = require('gulp');
 var spawn = require('child_process').spawn;
@@ -8,10 +7,10 @@ var browserSync = require('browser-sync').create();
 var SHELTR = require(__base + '/package.json').sheltr;
 var path = require('path');
 
-gulp.task('server:compile', function () {
+gulp.task('server:compile', function() {
   return gulp.src([
       SHELTR.srcDir + '/src/**/*.js',
-      SHELTR.srcDir + '/app.js'
+      SHELTR.srcDir + '/app.js',
     ], { base: '.' })
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -19,18 +18,18 @@ gulp.task('server:compile', function () {
     .pipe(gulp.dest(SHELTR.distDir));
 });
 
-gulp.task('server:serve', ['server:nodemon'], function(){
+gulp.task('server:serve', ['server:nodemon'], function() {
   browserSync.init({
-      proxy: 'http://localhost:3000',
-      files: [
-        SHELTR.srcDir + '/public/**/*',
-        '!' + SHELTR.srcDir + '/public/bower_components/**/*',
-      ],
-      port: 3001,
+    proxy: 'http://localhost:3000',
+    files: [
+      SHELTR.srcDir + '/public/**/*',
+      '!' + SHELTR.srcDir + '/public/bower_components/**/*',
+    ],
+    port: 3001,
   });
 });
 
-gulp.task('server:nodemon', function(cb){
+gulp.task('server:nodemon', function(cb) {
   var started = false;
 
   return $.nodemon({
@@ -38,13 +37,12 @@ gulp.task('server:nodemon', function(cb){
     tasks: ['server:compile'],
     watch: [
       path.resolve(SHELTR.srcDir + '/src/**/*'),
-      path.resolve(SHELTR.srcDir + '/app.js')
-    ]
-  }).on('start', function(){
-    if(!started) {
+      path.resolve(SHELTR.srcDir + '/app.js'),
+    ],
+  }).on('start', function() {
+    if (!started) {
       cb();
       started = true;
     }
   });
 });
-

@@ -1,5 +1,4 @@
 'use strict';
-/* globals __base */
 
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
@@ -7,14 +6,32 @@ var del = require('del');
 var browserSync = require('browser-sync');
 var SHELTR = require(__base + '/package.json').sheltr;
 
-gulp.task('default', function(done){
+gulp.task('default', function(done) {
   runSequence(
     ['server:compile'],
     done
   );
 });
 
-gulp.task('dist', function(done){
+gulp.task('jshint', function(done) {
+  return gulp.src([
+    SHELTR.srcDir + '/src/**/*.js',
+    SHELTR.srcDir + '/public/**/*.js',
+  ])
+  .pipe($.jshint())
+  .pipe($.jshint.reporter('jshint-stylish'));
+});
+
+
+gulp.task('jscs', function(done) {
+  return gulp.src([
+    SHELTR.srcDir + '/src/**/*.js',
+    SHELTR.srcDir + '/public/**/*.js',
+  ])
+  .pipe($.jscs());
+});
+
+gulp.task('dist', function(done) {
   runSequence(
     'server:compile',
     ['frontend:copy', 'frontend:sass', 'frontend:browserify'],
@@ -23,7 +40,7 @@ gulp.task('dist', function(done){
   );
 });
 
-gulp.task('serve', function(done){
+gulp.task('serve', function(done) {
   runSequence(
     'server:compile',
     ['frontend:copy', 'frontend:sass', 'frontend:browserify'],
@@ -32,18 +49,18 @@ gulp.task('serve', function(done){
   );
 
   gulp.watch([
-      SHELTR.srcDir + '/public/**/*'
+      SHELTR.srcDir + '/public/**/*',
     ], [
       'frontend:copy',
       'frontend:sass',
-      'frontend:browserify'
+      'frontend:browserify',
     ],
     browserSync.reload
   );
 });
 
-gulp.task('clean', function(done){
+gulp.task('clean', function(done) {
   del([
-    SHELTR.distDir
+    SHELTR.distDir,
   ], done);
 });

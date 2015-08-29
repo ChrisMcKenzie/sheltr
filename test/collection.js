@@ -6,19 +6,19 @@ let _collection;
 
 describe('Collection', function() {
 
-  before(function(done){
+  before(function(done) {
     db.setup(() => {
       _collection = new Collection('users');
     });
 
   });
 
-  describe('#query(...mixin)', function () {
-    it('it should build a query that returns rethinkdb info', function (done) {
+  describe('#query(...mixin)', function() {
+    it('it should build a query that returns rethinkdb info', function(done) {
       db.connect((err, conn) => {
-        _collection.query(function(q){
+        _collection.query(function(q) {
           return q.info();
-        }).run(_dbConn, function(err, result){
+        }).run(_dbConn, function(err, result) {
           assert.ifError(err);
           done();
         });

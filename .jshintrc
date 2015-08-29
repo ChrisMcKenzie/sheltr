@@ -12,6 +12,8 @@
   "quotmark": "single",
   "multistr": true,
   "globals": {
-    "angular": true
+    "angular": true,
+    "__base": true,
+    "$": true
   }
 }
