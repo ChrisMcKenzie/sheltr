@@ -1,5 +1,4 @@
 'use strict';
-/* globals __base, $ */
 
 var gulp = require('gulp');
 var spawn = require('child_process').spawn;
@@ -11,9 +10,9 @@ var glob = require('glob');
 var SHELTR = require(__base + '/package.json').sheltr;
 
 gulp.task('frontend:browserify', function(cb) {
-  glob(SHELTR.srcDir + '/public/scripts/app.js', {}, function (err, files) {
+  glob(SHELTR.srcDir + '/public/scripts/app.js', {}, function(err, files) {
     var b = browserify();
-    files.forEach(function (file) {
+    files.forEach(function(file) {
       b.add(file);
     });
     b.bundle()
@@ -24,7 +23,7 @@ gulp.task('frontend:browserify', function(cb) {
   });
 });
 
-gulp.task('frontend:sass', function () {
+gulp.task('frontend:sass', function() {
   return gulp.src(SHELTR.srcDir + '/public/styles/**/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
@@ -32,11 +31,11 @@ gulp.task('frontend:sass', function () {
     .pipe(gulp.dest(SHELTR.distDir + '/public/styles'));
 });
 
-gulp.task('frontend:copy', function(){
+gulp.task('frontend:copy', function() {
   return gulp.src([
       SHELTR.srcDir + '/public/**/*',
       '!' + SHELTR.srcDir + '/public/styles/*',
-      '!' + SHELTR.srcDir + '/public/scripts/**/*'
+      '!' + SHELTR.srcDir + '/public/scripts/**/*',
     ], { base: '.' })
     .pipe(gulp.dest(SHELTR.distDir));
 });

@@ -1,33 +1,61 @@
-<form class="vertical layout">
+<form name="form" ng-submit="create()" class="vertical layout">
   <h2 class="form__title">Basic Information</h2>
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="fname">First Name</label>
-      <input class="field__input" type="text" id="fname">
+      <input
+        class="field__input"
+        type="text"
+        required
+        ng-model="applicant.name.first">
     </div>
     <div class="field flex">
       <label class="field__label" for="lname">Last Name</label>
-      <input class="field__input" type="text" id="lname">
+      <input
+        id="lname"
+        class="field__input"
+        type="text"
+        required
+        ng-model="applicant.name.last">
     </div>
   </div>
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="email">email</label>
-      <input class="field__input" type="email" id="email">
+      <input
+        id="email"
+        class="field__input"
+        type="email"
+        required
+        ng-model="applicant.email">
     </div>
     <div class="field flex">
       <label class="field__label" for="phone">phone</label>
-      <input class="field__input" type="tel" id="phone">
+      <input
+        id="phone"
+        class="field__input"
+        type="tel"
+        required
+        ng-model="applicant.phone">
     </div>
   </div>
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="dob">Date of Birth</label>
-      <input class="field__input" type="date" id="dob">
+      <input
+        id="dob"
+        class="field__input"
+        type="date"
+        required
+        ng-model="applicant.dob">
     </div>
     <div class="field flex">
       <label class="field__label" for="sex">Sex</label>
-      <select class="field__input" id="sex">
+      <select
+        id="sex"
+        class="field__input"
+        required
+        ng-model="applicant.gender">
         <option></option>
         <option value="male">Male</option>
         <option value="female">Female</option>
@@ -35,7 +63,11 @@
     </div>
     <div class="field flex">
       <label class="field__label" for="ethnicity">Ethnicity</label>
-      <select class="field__input" id="ethnicity">
+      <select
+        id="ethnicity"
+        class="field__input"
+        required
+        ng-model="applicant.ethnicity">
         <option></option>
         <option value="native-american">Native American</option>
         <option value="caucasian">Caucasian</option>
@@ -46,7 +78,13 @@
     </div>
     <div class="field flex">
       <label class="field__label" for="children">Children</label>
-      <input class="field__input" type="number" id="children" max="10">
+      <input
+        id="children"
+        class="field__input"
+        type="number"
+        max="10"
+        min="0"
+        ng-model="applicant.children">
     </div>
   </div>
   <h2 class="form__title">Smoking & Drinking</h2>
@@ -271,6 +309,9 @@
       </div>
     </div>
   </div>
+  <footer class="horizontal-reverse layout">
+    <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="Save">
+  </footer>
 </form>
 <datalist id="states">
   <option value="AL">
@@ -324,4 +365,3 @@
   <option value="WI">
   <option value="WY">
 </datalist>
-

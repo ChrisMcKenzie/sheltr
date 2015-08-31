@@ -27,13 +27,17 @@
 
     <meta name="theme-color" content="#3372DF">
 
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/layout.css">
   </head>
   <body ng-app="sheltrApp">
     <div class="container">
-      <header class="title">
-        <h2>Sheltr</h2>
+      <header class="title horizontal layout center">
+        <h2 class="flex"><a ui-sref="home">Sheltr</a></h2>
+        <a ui-sref="signup({type: 'seeker'})">New Seeker</a>
       </header>
 
       <main class="content">

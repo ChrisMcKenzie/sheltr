@@ -56,9 +56,9 @@ export default class Collection {
    *
    * @return { Object }
    */
-  query(...mixins) {
+  query(...decorators) {
     var query = this.q;
-    mixins.forEach(function(mixin) {
+    decorators.forEach(function(mixin) {
       if ('function' === typeof mixin) {
         query = mixin(query);
       } else {
@@ -72,6 +72,31 @@ export default class Collection {
       },
     };
   }
+
+  filter(params) {
+    return this.query(function(q) {
+      var notFilters = ['limit', 'page', 'group'];
+
+      var limit = parseInt(params.limit);
+      var page = params.page - 1 || 0;
+
+      for (var key in params) {
+        if (notFilters.indexOf(key) === -1) {
+          var filter = {};
+          filter[key] = params[key];
+          q = q.filter(filter);
+        }
+      }
+
+      // Handle limit
+      if (!isNaN(limit) && !isNaN(page)) {
+        q = q.skip(page * limit).limit(limit);
+      }
+
+      return q;
+    });
+  }
+
   // Alias to query
   getAll() {
     return this.query.apply(this, arguments);

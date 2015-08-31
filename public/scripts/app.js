@@ -5,6 +5,7 @@ var satellizer = require('satellizer');
 angular.module('sheltrApp', [
   require('angular-ui-router'),
   require('./controllers'),
+  require('./services'),
   'satellizer',
 ])
   .run([

@@ -7,8 +7,31 @@ module.exports = MODULE;
 angular.module(MODULE, [])
   .controller('SignupController', [
     '$scope',
+    '$http',
     '$stateParams',
-    function($scope, $stateParams) {
+    function($scope, $http, $stateParams) {
+      var type = $stateParams.type;
+      var master = {
+        type: type,
+      };
+
+      $scope.reset = function() {
+        $scope.applicant = angular.copy(master);
+      };
+
+      $scope.create = function() {
+        console.log($scope.applicant);
+        $http.post('/api/applicants', $scope.applicant)
+          .then(function(response) {
+            console.log(response);
+          },
+          function(response) {
+            console.log(response);
+          });
+      };
+
+      $scope.reset();
+
       var inputs = document.querySelectorAll('.field__input');
 
       Array.prototype.forEach.call(inputs, function(input) {
