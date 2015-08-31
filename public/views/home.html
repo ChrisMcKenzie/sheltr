@@ -5,15 +5,15 @@
       <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Name</th>
-          <th class="mdl-data-table__cell--non-numeric">Name</th>
-          <th class="mdl-data-table__cell--non-numeric">Name</th>
+          <th class="mdl-data-table__cell--non-numeric">Date of Birth</th>
+          <th class="mdl-data-table__cell--non-numeric">Potential Matches</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="seeker in seekers">
           <td class="mdl-data-table__cell--non-numeric">{{seeker.name|fullname}}</td>
-          <td class="mdl-data-table__cell--non-numeric"></td>
-          <td class="mdl-data-table__cell--non-numeric"></td>
+          <td class="mdl-data-table__cell--non-numeric">{{seeker.dob|date:'longDate'}}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{seeker.matches}}</td>
         </tr>
       </tbody>
     </table>
@@ -23,6 +23,8 @@
       <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Name</th>
+          <th class="mdl-data-table__cell--non-numeric">Date of Birth</th>
+          <th class="mdl-data-table__cell--non-numeric">Potential Matches</th>
         </tr>
       </thead>
       <tbody>
@@ -31,8 +33,8 @@
         </tr>
         <tr ng-if="providers.length > 0" ng-repeat="provider in providers">
           <td class="mdl-data-table__cell--non-numeric">{{provider.name|fullname}}</td>
-          <td class="mdl-data-table__cell--non-numeric"></td>
-          <td class="mdl-data-table__cell--non-numeric"></td>
+          <td class="mdl-data-table__cell--non-numeric">{{provider.dob|date:'longDate'}}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{provider.matches}}</td>
         </tr>
       </tbody>
     </table>
