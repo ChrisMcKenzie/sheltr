@@ -37,7 +37,18 @@
     <div class="container">
       <header class="title horizontal layout center">
         <h2 class="flex"><a ui-sref="home">Sheltr</a></h2>
-        <a ui-sref="signup({type: 'seeker'})">New Seeker</a>
+        <a
+          class="mdl-button mdl-js-button"
+          ui-sref="signup({type: 'seeker'})"
+          ui-sref-active="mdl-button--accent">
+          New Seeker
+        </a>
+        <a
+          class="mdl-button mdl-js-button"
+          ui-sref="signup({type: 'provider'})"
+          ui-sref-active="mdl-button--accent">
+          New Provider
+        </a>
       </header>
 
       <main class="content">
@@ -45,8 +56,5 @@
       </main>
     </div>
     <script src="/scripts/app.js"></script>
-    <script>
-
-    </script>
   </body>
 </html>
