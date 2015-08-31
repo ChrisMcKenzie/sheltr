@@ -127,6 +127,10 @@ export default class Collection {
     // TODO(ChrisMcKenzie): validate based on json schema
     // if it has been set.
 
+    // Added created and updated fields
+    data.created = r.now();
+    data.updated = r.now();
+
     return this.query(function(q) {
       return q.insert(data);
     });
