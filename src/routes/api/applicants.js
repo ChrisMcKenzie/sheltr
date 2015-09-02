@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  Applicants.getById(req.params.id).run((err, result) => {
+  Applicants.getById(req.params.id).run(req._rdbConn, (err, result) => {
     if (err) return next(err);
 
     res.status(200).send(result);

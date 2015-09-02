@@ -109,10 +109,10 @@ export default class Collection {
    *  @param { string } id - Id of the record to get
    *  @return { Object }
    */
-  getById(id) {
+  getById(id, ...decorators) {
     return this.query(function(q) {
       return q.get(id);
-    });
+    }, ...decorators);
   }
 
   /**
