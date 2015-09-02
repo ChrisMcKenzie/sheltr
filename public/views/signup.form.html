@@ -46,7 +46,6 @@
         id="dob"
         class="field__input"
         type="date"
-        required
         ng-model="applicant.dob">
     </div>
     <div class="field flex">
@@ -54,7 +53,6 @@
       <select
         id="sex"
         class="field__input"
-        required
         ng-model="applicant.gender">
         <option></option>
         <option value="male">Male</option>
@@ -66,7 +64,6 @@
       <select
         id="ethnicity"
         class="field__input"
-        required
         ng-model="applicant.ethnicity">
         <option></option>
         <option value="native-american">Native American</option>
@@ -91,15 +88,25 @@
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="smoker">Tobacco</label>
-      <input class="field__input" type="checkbox" id="smoker">
+      <input
+        id="smoker"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.smoking.tobacco">
     </div>
     <div class="field flex">
       <label class="field__label" for="smoker">Marijuana</label>
-      <input class="field__input" type="checkbox" id="smoker">
+      <input
+        id="smoker"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.smoking.marijuana">
     </div>
     <div class="field flex">
       <label class="field__label" for="smoker">Preference</label>
-      <select class="field__input">
+      <select
+        class="field__input"
+        ng-model="applicant.smoking.preference">
         <option></option>
         <option value="inside">Inside</option>
         <option value="outside">Outside</option>
@@ -109,11 +116,18 @@
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="drinking">Drinking</label>
-      <input class="field__input" type="checkbox" id="drinking">
+      <input
+        id="drinking"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.drinking.value">
     </div>
     <div class="field flex">
       <label class="field__label" for="drinking_freq">Frequency</label>
-      <select class="field__input" data-bound-to-checkbox="drinking">
+      <select
+        class="field__input"
+        data-bound-to-checkbox="drinking"
+        ng-model="applicant.drinking.preference">
         <option></option>
         <option value="occasional">Occasional</option>
         <option value="everyday">Everyday</option>
@@ -124,11 +138,20 @@
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="pets">Do you have pets?</label>
-      <input class="field__input" type="checkbox" id="pets">
+      <input
+        id="pets"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.pets.value">
     </div>
     <div class="field flex">
       <label class="field__label" for="pets_count">How Many?</label>
-      <input class="field__input" type="number" min="0" data-bound-to-checkbox="pets">
+      <input
+        class="field__input"
+        type="number"
+        min="0"
+        data-bound-to-checkbox="pets"
+        ng-model="applicant.pets.count">
     </div>
   </div>
   <h2 class="form__title">Previous Addresses</h2>
@@ -213,42 +236,43 @@
   <h2 class="form__title">Housing Provider Preferences</h2>
   <div class="form__row">
     <div class="field flex">
-      <label class="field__label" for="income_source">Gender</label>
-      <select class="field__input" id="income_source">
-        <option>--</option>
-        <option value="any">Any</option>
-        <option value="inside">Male</option>
-        <option value="outside">Female</option>
+      <label class="field__label" for="gender_prefence">Gender</label>
+      <select
+        id="gender_preference"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in genderPrefs"
+        ng-model="applicant.filters.gender">
+        <option value="">--</option>
       </select>
     </div>
     <div class="field flex">
       <label class="field__label" for="income_source">Drinking</label>
-      <select class="field__input" id="income_source">
-        <option>--</option>
-        <option value="any">Any</option>
-        <option value="inside">Occasional</option>
-        <option value="outside">Everyday</option>
-        <option value="outside">None</option>
+      <select
+        id="income_source"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in drinkingPrefs"
+        ng-model="applicant.filters.drinking.preference">
+        <option value="">--</option>
       </select>
     </div>
     <div class="field flex">
-      <label class="field__label" for="income_source">Smoking</label>
-      <select class="field__input" id="income_source">
-        <option>--</option>
-        <option value="any">Any</option>
-        <option value="inside">Inside</option>
-        <option value="outside">Outside</option>
-        <option value="no">None</option>
+      <label class="field__label" for="smoking_preference">Smoking</label>
+      <select
+        id="smoking_preference"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in smokingPrefs"
+        ng-model="applicant.filters.smoking.preference">
+        <option value="">--<option>
       </select>
     </div>
     <div class="field flex">
-      <label class="field__label" for="income_source">Pets</label>
-      <select class="field__input" id="income_source">
-        <option>--</option>
-        <option value="any">Any</option>
-        <option value="inside">Inside</option>
-        <option value="outside">Outside</option>
-        <option value="no">None</option>
+      <label class="field__label" for="pet_preference">Pets</label>
+      <select
+        id="pet_preference"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in petPrefs"
+        ng-model="applicant.filters.pets.preference">
+        <option value="">--</option>
       </select>
     </div>
   </div>

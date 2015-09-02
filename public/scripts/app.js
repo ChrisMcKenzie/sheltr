@@ -37,6 +37,12 @@ angular.module('sheltrApp', [
           url: '/',
           templateUrl: 'views/home.html',
           controller: 'HomeController',
+        })
+
+        .state('applicant', {
+          url: '/applicants/:id',
+          templateUrl: 'views/applicant.view.html',
+          controller: 'ApplicantController',
         });
     },
   ]);

@@ -7,4 +7,5 @@ module.exports = MODULE;
 angular.module(MODULE, [
   require('./home'),
   require('./signup'),
+  require('./applicant'),
 ]);

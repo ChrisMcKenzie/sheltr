@@ -73,7 +73,7 @@ export default class Collection {
     };
   }
 
-  filter(params) {
+  filter(params, ...decorators) {
     return this.query(function(q) {
       var notFilters = ['limit', 'page', 'group'];
 
@@ -94,7 +94,7 @@ export default class Collection {
       }
 
       return q;
-    });
+    }, ...decorators);
   }
 
   // Alias to query

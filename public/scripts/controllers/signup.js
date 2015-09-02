@@ -19,6 +19,28 @@ angular.module(MODULE, [])
         $scope.applicant = angular.copy(master);
       };
 
+      $scope.genderPrefs = [
+        {name: 'male', value: 'male'},
+        {name: 'female', value: 'female'},
+      ];
+
+      $scope.smokingPrefs = [
+        {name: 'inside', value: 'inside'},
+        {name: 'outside', value: 'outside'},
+      ];
+
+      $scope.petPrefs = [
+        {name: 'inside', value: 'inside'},
+        {name: 'outside', value: 'outside'},
+        {name: 'none', value: 'none'},
+      ];
+
+      $scope.drinkingPrefs = [
+        {name: 'occasional', value: 'ocassional'},
+        {name: 'everyday', value: 'everyday'},
+        {name: 'none', value: 'none'},
+      ];
+
       $scope.create = function() {
         console.log($scope.applicant);
         $http.post('/api/applicants', $scope.applicant)

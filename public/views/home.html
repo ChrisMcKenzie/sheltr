@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="seeker in seekers">
+        <tr ui-sref="applicant({id: seeker.id})" ng-repeat="seeker in seekers">
           <td class="mdl-data-table__cell--non-numeric">{{seeker.name|fullname}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{seeker.dob|date:'longDate'}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{seeker.matches}}</td>
@@ -31,7 +31,7 @@
         <tr ng-if="providers.length <= 0" class="center-center horizontal layout">
           <td>You do not have any providers</td>
         </tr>
-        <tr ng-if="providers.length > 0" ng-repeat="provider in providers">
+        <tr ui-sref="applicant({id: provider.id})" ng-if="providers.length > 0" ng-repeat="provider in providers">
           <td class="mdl-data-table__cell--non-numeric">{{provider.name|fullname}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{provider.dob|date:'longDate'}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{provider.matches}}</td>

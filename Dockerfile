@@ -1,6 +1,5 @@
-## DO NOT RUN THIS FROM PROJECT ROOT THIS IS COPIED BY BUILD
-## SYSTEM
 FROM node:0.12
+MAINTAINER Chris McKenzie <chris@chrismckenzie.io>
 
 COPY dist/ package.json /opt/app/
 
