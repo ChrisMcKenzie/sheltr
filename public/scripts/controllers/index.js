@@ -8,4 +8,5 @@ angular.module(MODULE, [
   require('./home'),
   require('./signup'),
   require('./applicant'),
+  require('./login'),
 ]);

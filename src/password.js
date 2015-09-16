@@ -1,12 +1,23 @@
 'use strict';
-import {fork} from 'child-process';
+import {fork} from 'child_process';
+
+const ROUNDS = 10;
 
 // Taken from https://github.com/NodeBB/NodeBB/blob/master/src/password.js
 // because it's awesome;
 (function(module) {
 
-  module.hash = function(rounds, password, callback) {
-    forkChild({type: 'hash', rounds: rounds, password: password}, callback);
+  module.hash = function(password) {
+    return new Promise(function(resolve, reject) {
+      forkChild({type: 'hash', rounds: ROUNDS, password: password},
+        function(err, res) {
+          if (err) {
+            reject(err);
+          }
+
+          resolve(res);
+        });
+    });
   };
 
   module.compare = function(password, hash, callback) {
@@ -14,7 +25,7 @@ import {fork} from 'child-process';
   };
 
   function forkChild(message, callback) {
-    var child = fork('./bcrypt', {
+    var child = fork(__dirname + '/bcrypt', {
         silent: true,
       });
 

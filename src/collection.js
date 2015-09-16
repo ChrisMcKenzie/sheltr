@@ -132,7 +132,7 @@ export default class Collection {
     data.updated = r.now();
 
     return this.query(function(q) {
-      return q.insert(data);
+      return q.insert(data, {returnChanges: true});
     });
   }
 }
