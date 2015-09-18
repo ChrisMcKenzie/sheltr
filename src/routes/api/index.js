@@ -23,8 +23,7 @@ router.post('/authenticate', (req, res, next) => {
   Users.getByUsername(req.body.username.toLowerCase())
     .run(req._rdbConn, function(err, results) {
       if (err) {
-        res.status(401);
-        next(new Error('Wrong user or password'));
+        next({status: 401, message: 'Wrong user or password'});
         return;
       }
 
@@ -32,13 +31,12 @@ router.post('/authenticate', (req, res, next) => {
 
       password.compare(req.body.password, profile.password, function(err, ok) {
         if (err) {
-          res.status(401);
+          err.status = 401;
           next(err);
           return;
         }
         if (!ok) {
-          res.status(401);
-          next(new Error('Wrong user or password'));
+          next({status: 401, message: 'Wrong user or password'});
           return;
         }
 

@@ -12,9 +12,13 @@ angular.module('sheltrApp', [
     '$rootScope',
     '$state',
     '$stateParams',
-    function($rootScope, $state, $stateParams) {
+    '$auth',
+    function($rootScope, $state, $stateParams, $auth) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
+      $rootScope.isAuthenticated = function() {
+        return $auth.isAuthenticated();
+      };
     },
   ])
   .config([
@@ -28,6 +32,7 @@ angular.module('sheltrApp', [
 
       $urlRouterProvider.otherwise('/login');
 
+      $authProvider.tokenPrefix = 'sheltr';
       $authProvider.loginUrl = '/api/authenticate';
 
       function skipIfLoggedIn($q, $auth) {
@@ -60,6 +65,15 @@ angular.module('sheltrApp', [
           },
         })
 
+        .state('logout', {
+          url: '/logout',
+          template: null,
+          controller: 'LogoutController',
+          resolve: {
+            loginRequired: loginRequired,
+          },
+        })
+
         .state('signup', {
           url: '/signup/:type',
           templateUrl: 'views/signup.form.html',
@@ -86,7 +100,5 @@ angular.module('sheltrApp', [
             loginRequired: loginRequired,
           },
         });
-
-
     },
   ]);

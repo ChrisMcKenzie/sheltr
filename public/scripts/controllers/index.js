@@ -9,4 +9,5 @@ angular.module(MODULE, [
   require('./signup'),
   require('./applicant'),
   require('./login'),
+  require('./logout'),
 ]);

@@ -1,1 +1,17 @@
-<p>id: {{id}}</p>
+<main class="page">
+  <div class="page--header">
+    <div class="horizontal layout">
+      <h4 class="flex">{{applicant.name.first}} {{applicant.name.last}}</h4>
+      <span class="self-center mdl-color-text--grey-500 mdl-badge" data-badge="{{applicant.matches.length}}">Matches</span>
+    </div>
+    <div class="horizontal layout flex">
+      <span class="mdl-color-text--grey-500">{{applicant.email}}</span>
+    </div>
+  </div>
+
+  <section class="horizontal layout page--body">
+    <div class="flex-2">
+      <span><i class="material-icons md-24">face</i> {{applicant.gender}}</span>
+    </div>
+  </section>
+</main>

@@ -37,18 +37,26 @@
     <div class="container">
       <header class="title horizontal layout center">
         <h2 class="flex"><a ui-sref="home">Sheltr</a></h2>
-        <a
-          class="mdl-button mdl-js-button"
-          ui-sref="signup({type: 'seeker'})"
-          ui-sref-active="mdl-button--accent">
-          New Seeker
-        </a>
-        <a
-          class="mdl-button mdl-js-button"
-          ui-sref="signup({type: 'provider'})"
-          ui-sref-active="mdl-button--accent">
-          New Provider
-        </a>
+        <div ng-hide="!isAuthenticated()">
+          <a
+            class="mdl-button mdl-js-button"
+            ui-sref="signup({type: 'seeker'})"
+            ui-sref-active="mdl-button--accent">
+            New Seeker
+          </a>
+          <a
+            class="mdl-button mdl-js-button"
+            ui-sref="signup({type: 'provider'})"
+            ui-sref-active="mdl-button--accent">
+            New Provider
+          </a>
+
+          <a
+            class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button"
+            ui-sref="logout">
+            Signout
+          </a>
+        </div>
       </header>
 
       <main class="content">

@@ -10,6 +10,12 @@ angular.module(MODULE, [])
     '$http',
     '$stateParams',
     function($scope, $http, $stateParams) {
-      $scope.id = $stateParams.id;
+      var id = $scope.id = $stateParams.id;
+
+      $http.get(`/api/applicants/${id}`)
+        .then((response) => {
+          $scope.applicant = response.data;
+          console.log($scope.applicant);
+        });
     },
   ]);
