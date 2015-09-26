@@ -1,13 +1,17 @@
 'use strict';
 var angular = require('angular');
 var satellizer = require('satellizer');
+var material = require('angular-material');
 
 angular.module('sheltrApp', [
   require('angular-ui-router'),
   require('./controllers'),
   require('./services'),
+  'ngMaterial',
   'satellizer',
 ])
+  .constant('mapboxKey', 'pk.eyJ1IjoiY2hyaXNtY2tlbnppZSIsImEiOiJ' +
+      'jaWV5cHhpYTYwbDkzc2hrcnluc2x1MHFkIn0.S6Jl9xae40JH-GtwOckRrw')
   .run([
     '$rootScope',
     '$state',
@@ -25,10 +29,14 @@ angular.module('sheltrApp', [
     '$stateProvider',
     '$authProvider',
     '$urlRouterProvider',
+    'mapboxKey',
     function(
       $stateProvider,
       $authProvider,
-      $urlRouterProvider) {
+      $urlRouterProvider,
+      mapboxKey) {
+
+      L.mapbox.accessToken = mapboxKey;
 
       $urlRouterProvider.otherwise('/login');
 

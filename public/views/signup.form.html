@@ -312,26 +312,25 @@
   <h2 class="form__title">Location</h2>
   <div class="form__row">
     <div id="map" class="flex"></div>
-    <div class="vertical layout flex">
-      <div class="form__row">
-        <div class="field flex">
-          <label class="field__label" for="location_city">City</label>
-          <input class="field__input" type="text">
-        </div>
-      </div>
-      <div class="form__row">
-        <div class="field flex">
-          <label class="field__label" for="location_city">State</label>
-          <input class="field__input" type="text">
-        </div>
-      </div>
-      <div class="form__row">
-        <div class="field flex">
-          <label class="field__label" for="location_city">Range</label>
-          <input class="field__input" type="text">
-        </div>
-      </div>
-    </div>
+    <md-autocomplete
+      class="search"
+      md-selected-item="selectedItem"
+      md-search-text="searchText"
+      md-search-text-change="getMatches(searchText)"
+      md-selected-item="selectedSearch"
+      md-selected-item-change="selectedItemChange(item)"
+      md-items="item in mapSearchResults"
+      md-item-text="item.place_name"
+      md-no-cache="true"
+      md-select-on-match="true"
+      placeholder="Search">
+      <md-item-template>
+        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.place_name}}</span>
+      </md-item-template>
+      <md-not-found>
+        No matches found.
+      </md-not-found>
+    </md-autocomplete>
   </div>
   <footer class="horizontal-reverse layout">
     <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="Save">

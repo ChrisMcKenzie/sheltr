@@ -1,17 +1,415 @@
-<main class="page">
-  <div class="page--header">
-    <div class="horizontal layout">
-      <h4 class="flex">{{applicant.name.first}} {{applicant.name.last}}</h4>
-      <span class="self-center mdl-color-text--grey-500 mdl-badge" data-badge="{{applicant.matches.length}}">Matches</span>
+<div class="form">
+  <div class="form__title horizontal layout">
+    <h2 class="flex">Basic Information</h2>
+    <span class="badge">Created on {{applicant.created | date:'shortDate'}}</span>
+    <span class="badge">{{applicant.matches.length}} Potential Matches</span>
+  </div>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="fname">First Name</label>
+      <input
+        class="field__input"
+        type="text"
+        required
+        ng-model="applicant.name.first">
     </div>
-    <div class="horizontal layout flex">
-      <span class="mdl-color-text--grey-500">{{applicant.email}}</span>
+    <div class="field flex">
+      <label class="field__label" for="lname">Last Name</label>
+      <input
+        id="lname"
+        class="field__input"
+        type="text"
+        required
+        ng-model="applicant.name.last">
     </div>
   </div>
-
-  <section class="horizontal layout page--body">
-    <div class="flex-2">
-      <span><i class="material-icons md-24">face</i> {{applicant.gender}}</span>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="email">email</label>
+      <input
+        id="email"
+        class="field__input"
+        type="email"
+        required
+        ng-model="applicant.email">
     </div>
-  </section>
-</main>
+    <div class="field flex">
+      <label class="field__label" for="phone">phone</label>
+      <input
+        id="phone"
+        class="field__input"
+        type="tel"
+        required
+        ng-model="applicant.phone">
+    </div>
+  </div>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="dob">Date of Birth</label>
+      <input
+        id="dob"
+        class="field__input"
+        type="date"
+        ng-model="applicant.dob">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="sex">Sex</label>
+      <select
+        id="sex"
+        class="field__input"
+        ng-model="applicant.gender">
+        <option></option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="ethnicity">Ethnicity</label>
+      <select
+        id="ethnicity"
+        class="field__input"
+        ng-model="applicant.ethnicity">
+        <option></option>
+        <option value="native-american">Native American</option>
+        <option value="caucasian">Caucasian</option>
+        <option value="african-american">African American</option>
+        <option value="asian">Asian</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="children">Children</label>
+      <input
+        id="children"
+        class="field__input"
+        type="number"
+        max="10"
+        min="0"
+        ng-model="applicant.children">
+    </div>
+  </div>
+  <h2 class="form__title">Smoking & Drinking</h2>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="smoker">Tobacco</label>
+      <input
+        id="smoker"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.smoking.tobacco">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="smoker">Marijuana</label>
+      <input
+        id="smoker"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.smoking.marijuana">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="smoker">Preference</label>
+      <select
+        class="field__input"
+        ng-model="applicant.smoking.preference">
+        <option></option>
+        <option value="inside">Inside</option>
+        <option value="outside">Outside</option>
+      </select>
+    </div>
+  </div>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="drinking">Drinking</label>
+      <input
+        id="drinking"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.drinking.value">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="drinking_freq">Frequency</label>
+      <select
+        class="field__input"
+        data-bound-to-checkbox="drinking"
+        ng-model="applicant.drinking.preference">
+        <option></option>
+        <option value="occasional">Occasional</option>
+        <option value="everyday">Everyday</option>
+      </select>
+    </div>
+  </div>
+  <h2 class="form__title">Pets</h2>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="pets">Do you have pets?</label>
+      <input
+        id="pets"
+        class="field__input"
+        type="checkbox"
+        ng-model="applicant.pets.value">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="pets_count">How Many?</label>
+      <input
+        class="field__input"
+        type="number"
+        min="0"
+        data-bound-to-checkbox="pets"
+        ng-model="applicant.pets.count">
+    </div>
+  </div>
+  <h2 class="form__title">Previous Addresses</h2>
+  <div class="form__row">
+    <div class="field flex-5">
+      <label class="field__label" for="address">Address</label>
+      <input class="field__input" type="text" id="address">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="city">City</label>
+      <input class="field__input" type="text" id="city">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="state">State</label>
+      <input class="field__input" type="text" list="states" maxlength="2" id="state">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="zip">Zip</label>
+      <input class="field__input" type="text" id="zip">
+    </div>
+  </div>
+  <div class="form__row">
+    <div class="field flex-5">
+      <label class="field__label" for="address">Address</label>
+      <input class="field__input" type="text" id="address">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="city">City</label>
+      <input class="field__input" type="text" id="city">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="state">State</label>
+      <input class="field__input" type="text" list="states" maxlength="2" id="state">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="zip">Zip</label>
+      <input class="field__input" type="text" id="zip">
+    </div>
+  </div>
+  <div class="form__row">
+    <div class="field flex-5">
+      <label class="field__label" for="address">Address</label>
+      <input class="field__input" type="text" id="address">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="city">City</label>
+      <input class="field__input" type="text" id="city">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="state">State</label>
+      <input class="field__input" type="text" maxlength="2" id="state">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="zip">Zip</label>
+      <input class="field__input" type="text" id="zip">
+    </div>
+  </div>
+  <h2 class="form__title">Emergency Contact</h2>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="emergency_name">Name</label>
+      <input class="field__input" type="text" id="emergency_name">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="emergency_phone">phone</label>
+      <input class="field__input" type="tel" id="emergency_phone">
+    </div>
+  </div>
+  <h2 class="form__title">Income</h2>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="income_amount">amount</label>
+      <input class="field__input" type="number" id="income_amount">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="income_source">source</label>
+      <select class="field__input" id="income_source">
+        <option value="job">Job</option>
+      </select>
+    </div>
+  </div>
+  <h2 class="form__title">Housing Provider Preferences</h2>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="gender_prefence">Gender</label>
+      <select
+        id="gender_preference"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in genderPrefs"
+        ng-model="applicant.filters.gender">
+        <option value="">--</option>
+      </select>
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="income_source">Drinking</label>
+      <select
+        id="income_source"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in drinkingPrefs"
+        ng-model="applicant.filters.drinking.preference">
+        <option value="">--</option>
+      </select>
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="smoking_preference">Smoking</label>
+      <select
+        id="smoking_preference"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in smokingPrefs"
+        ng-model="applicant.filters.smoking.preference">
+        <option value="">--<option>
+      </select>
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="pet_preference">Pets</label>
+      <select
+        id="pet_preference"
+        class="field__input"
+        ng-options="pref.value as pref.name for pref in petPrefs"
+        ng-model="applicant.filters.pets.preference">
+        <option value="">--</option>
+      </select>
+    </div>
+  </div>
+  <h2 class="form__title">Housing Preferences</h2>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="roomates">Housing Type</label>
+      <select class="field__input" id="roomates">
+        <option>--</option>
+        <option value="true">House</option>
+        <option value="false">Apartment</option>
+      </select>
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="roomates">Are you ok with Roomates?</label>
+      <select class="field__input" id="roomates">
+        <option>--</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="roomates">Public Transportation Nearby</label>
+      <input class="field__input" type="checkbox" id="roomates">
+    </div>
+  </div>
+  <div class="form__row">
+    <div class="field flex">
+      <label class="field__label" for="roomates">Do you mind stairs?</label>
+      <input class="field__input" type="checkbox" id="roomates">
+    </div>
+    <div class="field flex">
+      <label class="field__label" for="roomates">Do you require special accessiblity? (Wheelchair)</label>
+      <input class="field__input" type="checkbox" id="roomates">
+    </div>
+  </div>
+  <h2 class="form__title">Location</h2>
+  <div class="form__row">
+    <div id="map" class="flex"></div>
+    <md-autocomplete
+      class="search"
+      md-selected-item="selectedItem"
+      md-search-text="searchText"
+      md-search-text-change="getMatches(searchText)"
+      md-selected-item="selectedSearch"
+      md-selected-item-change="selectedItemChange(item)"
+      md-items="item in mapSearchResults"
+      md-item-text="item.place_name"
+      md-no-cache="true"
+      md-select-on-match="true"
+      placeholder="Search">
+      <md-item-template>
+        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.place_name}}</span>
+      </md-item-template>
+      <md-not-found>
+        No matches found.
+      </md-not-found>
+    </md-autocomplete>
+  </div>
+
+  <h2 id="matches" class="form__title">Matches</h2>
+  <div class="form__row">
+    <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Name</th>
+          <th class="mdl-data-table__cell--non-numeric">Date of Birth</th>
+          <th class="mdl-data-table__cell--non-numeric">Potential Matches</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ui-sref="applicant({id: seeker.id})" ng-repeat="match in applicant.matches">
+          <td class="mdl-data-table__cell--non-numeric">{{match.name|fullname}}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{match.dob|date:'longDate'}}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{match.matches}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer class="horizontal-reverse layout">
+    <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="Update">
+  </footer>
+</div>
+
+<datalist id="states">
+  <option value="AL">
+  <option value="AK">
+  <option value="AZ">
+  <option value="AR">
+  <option value="CA">
+  <option value="CO">
+  <option value="CT">
+  <option value="DE">
+  <option value="FL">
+  <option value="GA">
+  <option value="HI">
+  <option value="ID">
+  <option value="IL">
+  <option value="IN">
+  <option value="IA">
+  <option value="KS">
+  <option value="KY">
+  <option value="LA">
+  <option value="ME">
+  <option value="MD">
+  <option value="MA">
+  <option value="MI">
+  <option value="MN">
+  <option value="MS">
+  <option value="MO">
+  <option value="MT">
+  <option value="NE">
+  <option value="NV">
+  <option value="NH">
+  <option value="NJ">
+  <option value="NM">
+  <option value="NY">
+  <option value="NC">
+  <option value="ND">
+  <option value="OH">
+  <option value="OK">
+  <option value="OR">
+  <option value="PA">
+  <option value="RI">
+  <option value="SC">
+  <option value="SD">
+  <option value="TN">
+  <option value="TX">
+  <option value="UT">
+  <option value="VT">
+  <option value="VA">
+  <option value="WA">
+  <option value="WV">
+  <option value="WI">
+  <option value="WY">
+</datalist>
