@@ -1,4 +1,4 @@
-<div class="form">
+<form name="form" class="form" ng-submit="update()">
   <div class="form__title horizontal layout">
     <h2 class="flex">Basic Information</h2>
     <span class="badge">Created on {{applicant.created | date:'shortDate'}}</span>
@@ -359,7 +359,7 @@
   <footer class="horizontal-reverse layout">
     <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="Update">
   </footer>
-</div>
+</form>
 
 <datalist id="states">
   <option value="AL">

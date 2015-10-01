@@ -29,4 +29,13 @@ router.post('/', (req, res, next) => {
   });
 });
 
+router.patch('/:id', (req, res, next) => {
+  Applicants.update(req.params.id, req.body)
+    .run(req._rdbConn, (err, result) => {
+      if (err) return next(err);
+
+      res.status(200).send(req.body);
+    });
+});
+
 export default router;

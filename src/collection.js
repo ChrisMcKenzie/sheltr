@@ -135,4 +135,26 @@ export default class Collection {
       return q.insert(data, {returnChanges: true});
     });
   }
+
+
+  /**
+   *  Update the given record
+   *
+   *  builds a `r.table(<table-name>).get(<id>).update(<data>)` query
+   *
+   *  @param { Object } id - The id to update
+   *  @param { Object } data - The data to be inserted
+   *  @return { Object }
+   */
+  update(id, data) {
+    // TODO(ChrisMcKenzie): validate based on json schema
+    // if it has been set.
+
+    // Added updated fields
+    data.updated = r.now();
+
+    return this.query(function(q) {
+      return q.get(id).update(data, {returnChanges: true});
+    });
+  }
 }
