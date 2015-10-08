@@ -2,7 +2,8 @@ import r from 'rethinkdb';
 import Collection from '../collection';
 
 function matchesFilter(row) {
-  return r.table('applicants').filter(row('filters').merge({
+  return r.table('applicants')
+  .filter(row('filters').merge({
     type: r.branch(
       row('type').eq('provider'),
       'seeker',
@@ -39,6 +40,11 @@ export default class Applicants extends Collection {
 
   getById(id) {
     return super.getById(id, getMatches);
+  }
+
+  update(id, applicant) {
+    applicant.dob = new Date(applicant.dob);
+    return super.update(id, applicant);
   }
 
   insert(applicant) {

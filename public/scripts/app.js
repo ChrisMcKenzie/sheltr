@@ -10,8 +10,6 @@ angular.module('sheltrApp', [
   'ngMaterial',
   'satellizer',
 ])
-  .constant('mapboxKey', 'pk.eyJ1IjoiY2hyaXNtY2tlbnppZSIsImEiOiJ' +
-      'jaWV5cHhpYTYwbDkzc2hrcnluc2x1MHFkIn0.S6Jl9xae40JH-GtwOckRrw')
   .run([
     '$rootScope',
     '$state',
@@ -29,14 +27,10 @@ angular.module('sheltrApp', [
     '$stateProvider',
     '$authProvider',
     '$urlRouterProvider',
-    'mapboxKey',
     function(
       $stateProvider,
       $authProvider,
-      $urlRouterProvider,
-      mapboxKey) {
-
-      L.mapbox.accessToken = mapboxKey;
+      $urlRouterProvider) {
 
       $urlRouterProvider.otherwise('/login');
 
@@ -83,8 +77,8 @@ angular.module('sheltrApp', [
         })
 
         .state('signup', {
-          url: '/signup/:type',
-          templateUrl: 'views/signup.form.html',
+          url: '/applicants/new',
+          templateUrl: 'views/applicant.view.html',
           controller: 'SignupController',
           resolve: {
             loginRequired: loginRequired,

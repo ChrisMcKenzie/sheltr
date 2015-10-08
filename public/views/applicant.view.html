@@ -1,8 +1,12 @@
-<form name="form" class="form" ng-submit="update()">
+<form name="form" class="form" ng-submit="submit()">
   <div class="form__title horizontal layout">
     <h2 class="flex">Basic Information</h2>
-    <span class="badge">Created on {{applicant.created | date:'shortDate'}}</span>
-    <span class="badge">{{applicant.matches.length}} Potential Matches</span>
+    <div ng-hide="!!hideTags">
+      <span class="badge">Created on {{applicant.created | date:'shortDate'}}</span>
+      <span class="badge">{{applicant.matches.length}} Potential Matches</span>
+    </div>
+    <div ng-show="!!hideTags" class="horizontal layout">
+    </div>
   </div>
   <div class="form__row">
     <div class="field flex">
@@ -87,6 +91,16 @@
         min="0"
         ng-model="applicant.children">
     </div>
+    <div class="field flex">
+      <label class="field__label" for="type">Type</label>
+      <select
+        id="type"
+        class="field__input"
+        ng-model="applicant.type">
+        <option value="provider">Provider</option>
+        <option value="seeker">Seeker</option>
+      </select>
+    </div>
   </div>
   <h2 class="form__title">Smoking & Drinking</h2>
   <div class="form__row">
@@ -158,81 +172,92 @@
         ng-model="applicant.pets.count">
     </div>
   </div>
-  <h2 class="form__title">Previous Addresses</h2>
-  <div class="form__row">
-    <div class="field flex-5">
-      <label class="field__label" for="address">Address</label>
-      <input class="field__input" type="text" id="address">
-    </div>
-    <div class="field flex">
-      <label class="field__label" for="city">City</label>
-      <input class="field__input" type="text" id="city">
-    </div>
-    <div class="field flex">
-      <label class="field__label" for="state">State</label>
-      <input class="field__input" type="text" list="states" maxlength="2" id="state">
-    </div>
-    <div class="field flex">
-      <label class="field__label" for="zip">Zip</label>
-      <input class="field__input" type="text" id="zip">
-    </div>
+  <div class="form__title horizontal layout">
+    <h2 class="flex">Addresses</h2>
+    <a class="mdl-button mdl-js-button mdl-button--icon" ng-click="addAddy()">
+      <i class="material-icons">add</i>
+    </a>
   </div>
-  <div class="form__row">
+  <div class="form__row" ng-repeat="addy in applicant.addresses">
     <div class="field flex-5">
       <label class="field__label" for="address">Address</label>
-      <input class="field__input" type="text" id="address">
+      <input
+        id="address"
+        class="field__input"
+        type="text"
+        ng-model="addy.street">
     </div>
     <div class="field flex">
       <label class="field__label" for="city">City</label>
-      <input class="field__input" type="text" id="city">
+      <input
+        id="city"
+        class="field__input"
+        type="text"
+        ng-model="addy.city">
     </div>
     <div class="field flex">
       <label class="field__label" for="state">State</label>
-      <input class="field__input" type="text" list="states" maxlength="2" id="state">
+      <input
+        id="state"
+        class="field__input"
+        type="text"
+        list="states"
+        maxlength="2"
+        ng-model="addy.state">
     </div>
     <div class="field flex">
       <label class="field__label" for="zip">Zip</label>
-      <input class="field__input" type="text" id="zip">
+      <input
+        id="zip"
+        class="field__input"
+        type="text"
+        ng-model="addy.zip">
     </div>
-  </div>
-  <div class="form__row">
-    <div class="field flex-5">
-      <label class="field__label" for="address">Address</label>
-      <input class="field__input" type="text" id="address">
-    </div>
+
     <div class="field flex">
-      <label class="field__label" for="city">City</label>
-      <input class="field__input" type="text" id="city">
-    </div>
-    <div class="field flex">
-      <label class="field__label" for="state">State</label>
-      <input class="field__input" type="text" maxlength="2" id="state">
-    </div>
-    <div class="field flex">
-      <label class="field__label" for="zip">Zip</label>
-      <input class="field__input" type="text" id="zip">
+      <label class="field__label" for="current">Current</label>
+      <input
+        id="current"
+        class="field__input"
+        type="checkbox"
+        ng-model="addy.current">
     </div>
   </div>
   <h2 class="form__title">Emergency Contact</h2>
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="emergency_name">Name</label>
-      <input class="field__input" type="text" id="emergency_name">
+      <input
+        id="emergency_name"
+        class="field__input"
+        type="text"
+        ng-model="applicant.emergency.name">
     </div>
     <div class="field flex">
       <label class="field__label" for="emergency_phone">phone</label>
-      <input class="field__input" type="tel" id="emergency_phone">
+      <input
+        id="emergency_phone"
+        class="field__input"
+        type="text"
+        ng-model="applicant.emergency.phone">
     </div>
   </div>
   <h2 class="form__title">Income</h2>
   <div class="form__row">
     <div class="field flex">
       <label class="field__label" for="income_amount">amount</label>
-      <input class="field__input" type="number" id="income_amount">
+      <input
+        id="income_amount"
+        class="field__input"
+        type="number"
+        ng-model="applicant.income.amount">
     </div>
     <div class="field flex">
       <label class="field__label" for="income_source">source</label>
-      <select class="field__input" id="income_source">
+      <select
+        id="income_source"
+        class="field__input"
+        ng-model="applicant.income.source">
         <option value="job">Job</option>
       </select>
     </div>
@@ -313,51 +338,29 @@
       <input class="field__input" type="checkbox" id="roomates">
     </div>
   </div>
-  <h2 class="form__title">Location</h2>
-  <div class="form__row">
-    <div id="map" class="flex"></div>
-    <md-autocomplete
-      class="search"
-      md-selected-item="selectedItem"
-      md-search-text="searchText"
-      md-search-text-change="getMatches(searchText)"
-      md-selected-item="selectedSearch"
-      md-selected-item-change="selectedItemChange(item)"
-      md-items="item in mapSearchResults"
-      md-item-text="item.place_name"
-      md-no-cache="true"
-      md-select-on-match="true"
-      placeholder="Search">
-      <md-item-template>
-        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.place_name}}</span>
-      </md-item-template>
-      <md-not-found>
-        No matches found.
-      </md-not-found>
-    </md-autocomplete>
-  </div>
-
-  <h2 id="matches" class="form__title">Matches</h2>
-  <div class="form__row">
-    <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
-      <thead>
-        <tr>
-          <th class="mdl-data-table__cell--non-numeric">Name</th>
-          <th class="mdl-data-table__cell--non-numeric">Date of Birth</th>
-          <th class="mdl-data-table__cell--non-numeric">Potential Matches</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ui-sref="applicant({id: seeker.id})" ng-repeat="match in applicant.matches">
-          <td class="mdl-data-table__cell--non-numeric">{{match.name|fullname}}</td>
-          <td class="mdl-data-table__cell--non-numeric">{{match.dob|date:'longDate'}}</td>
-          <td class="mdl-data-table__cell--non-numeric">{{match.matches}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div ng-hide="!!hideTags">
+    <h2 id="matches" class="form__title">Matches</h2>
+    <div class="form__row">
+      <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Name</th>
+            <th class="mdl-data-table__cell--non-numeric">Date of Birth</th>
+            <th class="mdl-data-table__cell--non-numeric">Potential Matches</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ui-sref="applicant({id: seeker.id})" ng-repeat="match in applicant.matches">
+            <td class="mdl-data-table__cell--non-numeric">{{match.name|fullname}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{match.dob|date:'longDate'}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{match.matches}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <footer class="horizontal-reverse layout">
-    <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="Update">
+    <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="{{task}}">
   </footer>
 </form>
 
