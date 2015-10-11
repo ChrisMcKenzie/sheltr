@@ -101,6 +101,12 @@ angular.module('sheltrApp', [
           resolve: {
             loginRequired: loginRequired,
           },
+        })
+
+        .state('organization', {
+          url: '/organization',
+          templateUrl: 'views/org.view.html',
+          controller: 'OrgController',
         });
     },
   ]);

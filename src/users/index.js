@@ -19,9 +19,9 @@ export default class Users extends Collection {
     return super.filter(query, ...decorators);
   }
 
-  getByUsername(username) {
+  getByEmail(email) {
     return this.query(function(q) {
-      return q.getAll(username, {index: 'username'});
+      return q.getAll(email, {index: 'email'});
     });
   }
 }

@@ -11,22 +11,22 @@ export default {
     port: parseInt(process.env.RETHINKDB_PORT_28015_TCP_PORT) || 28015,
     name: process.env.RDB_DB || 'sheltr',
     tables: {
-      program: {
-        primary: 'id',
-      },
       applicants: {
         primary: 'id',
         secondary: {
-          program: 'program_id',
-          coordinator: 'coordinator_id',
+          organizationId: 'organizationId',
+          createdBy: 'createdBy',
         },
       },
       users: {
         primary: 'id',
         secondary: {
-          program: 'program_id',
-          username: 'username',
+          organizationId: 'organizationId',
+          email: 'email',
         },
+      },
+      organizations: {
+        primary: 'id',
       },
     },
   },

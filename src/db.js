@@ -32,7 +32,7 @@ export function setup(cb) {
 
       function createIndex(indexName) {
         r.db(config.db.name)
-         .table(tbl).indexCreate(indexName, secondary[indexName])
+         .table(tbl).indexCreate(indexName, r.row(secondary[indexName]))
          .run(connection, function(err, result) {
           if (err) {
             logdebug(

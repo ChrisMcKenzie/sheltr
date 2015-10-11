@@ -101,6 +101,17 @@
         <option value="seeker">Seeker</option>
       </select>
     </div>
+    <div class="field flex" ng-hide="!!hideTags">
+      <label class="field__label" for="status">Status</label>
+      <select
+        id="status"
+        class="field__input"
+        ng-model="applicant.status">
+        <option value="provider">Completed</option>
+        <option value="seeker">Canceled</option>
+        <option value="seeker">Failed Background Check</option>
+      </select>
+    </div>
   </div>
   <h2 class="form__title">Smoking & Drinking</h2>
   <div class="form__row">

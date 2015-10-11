@@ -6,12 +6,7 @@ var del = require('del');
 var browserSync = require('browser-sync');
 var SHELTR = require(__base + '/package.json').sheltr;
 
-gulp.task('default', function(done) {
-  runSequence(
-    ['server:compile'],
-    done
-  );
-});
+gulp.task('default', ['serve']);
 
 gulp.task('jshint', function(done) {
   return gulp.src([
@@ -21,7 +16,6 @@ gulp.task('jshint', function(done) {
   .pipe($.jshint())
   .pipe($.jshint.reporter('jshint-stylish'));
 });
-
 
 gulp.task('jscs', function(done) {
   return gulp.src([

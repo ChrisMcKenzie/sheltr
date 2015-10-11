@@ -10,4 +10,5 @@ angular.module(MODULE, [
   require('./applicant'),
   require('./login'),
   require('./logout'),
+  require('./org'),
 ]);
