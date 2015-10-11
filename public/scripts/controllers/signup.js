@@ -4,17 +4,20 @@ var MODULE = 'sheltr.controllers.signup';
 
 module.exports = MODULE;
 
-angular.module(MODULE, [])
+angular.module(MODULE, ['ngMaterial'])
   .controller('SignupController', [
     '$scope',
     '$http',
     '$stateParams',
-    function($scope, $http, $stateParams) {
+    '$mdToast',
+    '$state',
+    function($scope, $http, $stateParams, $mdToast, $state) {
       var type = $stateParams.type;
       $scope.hideTags = true;
       $scope.task = 'create';
       var master = {
         type: type,
+        filters: {},
         addresses: [{}],
       };
 
@@ -52,10 +55,12 @@ angular.module(MODULE, [])
       $scope.submit = function() {
         $http.post('/api/applicants', $scope.applicant)
           .then(function(response) {
-            console.log(response);
+            $state.go('home');
           },
           function(response) {
-            console.log(response);
+            $mdToast.show(
+              $mdToast.simple().content('Unable to insert application.')
+            );
           });
       };
 

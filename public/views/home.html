@@ -10,6 +10,7 @@
           <th class="mdl-data-table__cell--non-numeric">Name</th>
           <th class="mdl-data-table__cell--non-numeric">Date of Birth</th>
           <th class="mdl-data-table__cell--non-numeric">Potential Matches</th>
+          <th class="mdl-data-table__cell--non-numeric">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,7 @@
           <td class="mdl-data-table__cell--non-numeric">{{seeker.name|fullname}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{seeker.dob|date:'longDate'}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{seeker.matches}}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{seeker.status}}</td>
         </tr>
       </tbody>
     </table>
@@ -28,6 +30,7 @@
           <th class="mdl-data-table__cell--non-numeric">Name</th>
           <th class="mdl-data-table__cell--non-numeric">Date of Birth</th>
           <th class="mdl-data-table__cell--non-numeric">Potential Matches</th>
+          <th class="mdl-data-table__cell--non-numeric">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +41,7 @@
           <td class="mdl-data-table__cell--non-numeric">{{provider.name|fullname}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{provider.dob|date:'longDate'}}</td>
           <td class="mdl-data-table__cell--non-numeric">{{provider.matches}}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{provider.status}}</td>
         </tr>
       </tbody>
     </table>

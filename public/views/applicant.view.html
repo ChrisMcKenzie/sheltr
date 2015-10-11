@@ -1,4 +1,4 @@
-<form name="form" class="form" ng-submit="submit()">
+<form name="form" class="form page" ng-submit="submit()">
   <div class="form__title horizontal layout">
     <h2 class="flex">Basic Information</h2>
     <div ng-hide="!!hideTags">
@@ -96,7 +96,8 @@
       <select
         id="type"
         class="field__input"
-        ng-model="applicant.type">
+        ng-model="applicant.type"
+        required>
         <option value="provider">Provider</option>
         <option value="seeker">Seeker</option>
       </select>
@@ -107,9 +108,9 @@
         id="status"
         class="field__input"
         ng-model="applicant.status">
-        <option value="provider">Completed</option>
-        <option value="seeker">Canceled</option>
-        <option value="seeker">Failed Background Check</option>
+        <option value="completed">Completed</option>
+        <option value="canceled">Canceled</option>
+        <option value="failed">Failed Background Check</option>
       </select>
     </div>
   </div>
@@ -364,7 +365,7 @@
           <tr ui-sref="applicant({id: seeker.id})" ng-repeat="match in applicant.matches">
             <td class="mdl-data-table__cell--non-numeric">{{match.name|fullname}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{match.dob|date:'longDate'}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{match.matches}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{match.matches.length}}</td>
           </tr>
         </tbody>
       </table>

@@ -4,12 +4,14 @@ var MODULE = 'sheltr.controllers.applicant';
 
 module.exports = MODULE;
 
-angular.module(MODULE, [])
+angular.module(MODULE, ['ngMaterial'])
   .controller('ApplicantController', [
     '$scope',
     '$http',
     '$stateParams',
-    function($scope, $http, $stateParams) {
+    '$state',
+    '$mdToast',
+    function($scope, $http, $stateParams, $state, $mdToast) {
       var id = $scope.id = $stateParams.id;
       $scope.hideTags = false;
       $scope.task = 'update';
@@ -17,10 +19,14 @@ angular.module(MODULE, [])
       $scope.submit = function() {
         $http.patch(`/api/applicants/${id}`, $scope.applicant)
           .then(function(response) {
-            console.log(response);
+            $mdToast.show(
+              $mdToast.simple().content('Applicant successfully updated.')
+            );
           },
           function(response) {
-            console.log(response);
+            $mdToast.show(
+              $mdToast.simple().content('Unable to insert application.')
+            );
           });
       };
 

@@ -15,7 +15,15 @@ function matchesFilter(row) {
 function getMatchesCount(q) {
   return q.map(function(row) {
     return row.merge({
-      matches: matchesFilter(row).count(),
+      matches: matchesFilter(row)
+        .filter(
+          function(doc) {
+            return doc('status').eq('');
+          },
+          {
+            default: true,
+          }
+        ).count(),
     });
   });
 }
