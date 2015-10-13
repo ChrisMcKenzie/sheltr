@@ -1,4 +1,11 @@
-*
-!LICENSE
-!dist/
-!package.json
+build/
+public/
+src/
+test/
+.*
+app.js
+Dockerfile
+gulpfile.js
+README.js
+wercker.yml
+node_modules
