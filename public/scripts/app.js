@@ -57,6 +57,17 @@ angular.module('sheltrApp', [
         return deferred.promise;
       }
 
+      function adminRequired($q, $location, $auth) {
+        var deferred = $q.defer();
+        var payload = $auth.getPayload();
+        if (payload.admin) {
+          deferred.resolve();
+        } else {
+          $location.path('/');
+        }
+        return deferred.promise;
+      }
+
       $stateProvider
         .state('login', {
           url: '/login',
@@ -107,6 +118,9 @@ angular.module('sheltrApp', [
           url: '/organization',
           templateUrl: 'views/org.view.html',
           controller: 'OrgController',
+          resolve: {
+            adminRequired: adminRequired,
+          },
         });
     },
   ]);

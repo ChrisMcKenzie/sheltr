@@ -1,15 +1,17 @@
 'use strict';
 
-var MODULE = 'sheltr.controllers.home';
+var MODULE = 'sheltr.controllers.org';
 
 angular.module(MODULE, [])
-  .controller('HomeController', [
+  .controller('OrgController', [
     '$scope',
     '$state',
-    'Applicants',
+    'Organization',
     'Account',
-    function($scope, $state, Applicants, Account) {
-      $scope.seekers = [];
+    function($scope, $state, Organization, Account) {
+      Organization.GetOrganization().then(function(response) {
+        $scope.org = response.data;
+      });
 
       Account.getProfile().then(function(response) {
         $scope.user = response.data;
@@ -18,23 +20,8 @@ angular.module(MODULE, [])
         console.log(response);
       });
 
-      Applicants.seekers.getAll({
-        limit: 10,
-      })
-      .then(function(response) {
-        $scope.seekers = response.data;
-      }, function() {
-        // Handle errors
-      });
-
-
-      Applicants.providers.getAll({
-        limit: 10,
-      })
-      .then(function(response) {
-        $scope.providers = response.data;
-      }, function() {
-        // Handle errors
+      Account.getProfiles().then(function(response) {
+        $scope.users = response.data;
       });
     },
   ]);

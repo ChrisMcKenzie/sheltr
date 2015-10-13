@@ -1,3 +1,24 @@
 <main class="page">
+  <h4>{{org.name}}</h4>
+  <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric layout horizontal center">
+          <span class="flex">Actions</span>
+          <a class="mdl-data-table__cell--button mdl-button mdl-js-button mdl-button--icon" ng-click="addAddy()">
+            <i class="material-icons">add</i>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  ng-repeat="user in users">
+        <td class="mdl-data-table__cell--non-numeric">{{user.name }}</td>
+        <td class="mdl-data-table__cell--non-numeric">
 
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </main>

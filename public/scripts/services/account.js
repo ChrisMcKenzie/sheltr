@@ -13,5 +13,11 @@ angular.module(MODULE, [])
       updateProfile: function(profileData) {
         return $http.put('/api/users/me', profileData);
       },
+      getProfiles: function() {
+        return $http.get('/api/users');
+      },
+      insertProfile: function(user) {
+        return $http.post('/api/users', user);
+      },
     };
   });

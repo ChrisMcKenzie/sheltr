@@ -7,7 +7,7 @@ module.exports = MODULE;
 angular.module(MODULE, [])
 .factory('Organization', function($http) {
     return {
-      getOrganization: function() {
+      GetOrganization: function() {
         return $http.get('/api/organization/');
       },
     };
