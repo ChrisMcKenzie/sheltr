@@ -1,15 +1,19 @@
 'use strict';
+import nconf from 'nconf';
 
-export default {
+nconf.argv()
+  .env()
+  .file({ file: __dirname + '/config.json' });
+
+nconf.defaults({
   env: process.env.NODE_ENV || 'development',
   jwt: {
-    secretPath: process.env.JWT_PUB_KEY ||
-      process.env.HOME + '/.ssh/id_rsa.pub',
+    secretPath: process.env.HOME + '/.ssh/id_rsa.pub',
   },
   db: {
-    host: process.env.RETHINKDB_PORT_28015_TCP_ADDR || 'localhost',
-    port: parseInt(process.env.RETHINKDB_PORT_28015_TCP_PORT) || 28015,
-    name: process.env.RDB_DB || 'sheltr',
+    host: 'localhost',
+    port: 28015,
+    name: 'sheltr',
     tables: {
       applicants: {
         primary: 'id',
@@ -30,4 +34,6 @@ export default {
       },
     },
   },
-};
+});
+
+export default nconf;

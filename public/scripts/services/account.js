@@ -16,7 +16,10 @@ angular.module(MODULE, [])
       getProfiles: function() {
         return $http.get('/api/users');
       },
-      insertProfile: function(user) {
+      deleteProfile: function(id) {
+        return $http.delete(`/api/users/${id}`);
+      },
+      createProfile: function(user) {
         return $http.post('/api/users', user);
       },
     };

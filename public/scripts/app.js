@@ -1,5 +1,6 @@
 'use strict';
 var angular = require('angular');
+var angularMessages = require('angular-messages');
 var satellizer = require('satellizer');
 var material = require('angular-material');
 
@@ -8,14 +9,17 @@ angular.module('sheltrApp', [
   require('./controllers'),
   require('./services'),
   'ngMaterial',
+  'ngMessages',
   'satellizer',
 ])
   .run([
+    '$animate',
     '$rootScope',
     '$state',
     '$stateParams',
     '$auth',
-    function($rootScope, $state, $stateParams, $auth) {
+    function($animate, $rootScope, $state, $stateParams, $auth) {
+      $animate.enabled(true);
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
       $rootScope.isAuthenticated = function() {

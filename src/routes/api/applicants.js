@@ -1,4 +1,5 @@
 import express from 'express';
+import {events} from '../../events';
 import ApplicantsCollection from '../../applicants';
 import {OrgListFilter, OrgSingleFilter} from './filters';
 
@@ -31,6 +32,7 @@ router.post('/', (req, res, next) => {
     if (err) return next(err);
 
     res.status(201).send(req.body);
+    events.emit('applicants::create', req.body);
   });
 });
 
@@ -42,6 +44,7 @@ router.patch('/:id', (req, res, next) => {
       if (err) return next(err);
 
       res.status(200).send(req.body);
+      events.emit('applicants::update', req.body);
     });
 });
 

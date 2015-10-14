@@ -6,17 +6,19 @@
         <th class="mdl-data-table__cell--non-numeric">Name</th>
         <th class="mdl-data-table__cell--non-numeric layout horizontal center">
           <span class="flex">Actions</span>
-          <a class="mdl-data-table__cell--button mdl-button mdl-js-button mdl-button--icon" ng-click="addAddy()">
+          <a class="mdl-data-table__cell--button mdl-button mdl-js-button mdl-button--icon" ng-click="openCreateProfile($event)">
             <i class="material-icons">add</i>
           </a>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr  ng-repeat="user in users">
-        <td class="mdl-data-table__cell--non-numeric">{{user.name }}</td>
-        <td class="mdl-data-table__cell--non-numeric">
-
+      <tr ng-repeat="(id, user) in users">
+        <td class="mdl-data-table__cell--non-numeric">{{user.name}}</td>
+        <td>
+          <md-button ng-click="deleteUser(id)" class="md-icon-button">
+            <md-icon>delete</md-icon>
+          </md-button>
         </td>
       </tr>
     </tbody>

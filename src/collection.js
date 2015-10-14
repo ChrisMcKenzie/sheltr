@@ -3,28 +3,7 @@
  */
 import r from 'rethinkdb';
 import debug from 'debug';
-
-/**
- *  Run Handlers
- *
- *  Handles results returned by rethink
- *
- *  @private
- */
-let _handler = function(hollaback) {
-  return function(err, cursor) {
-    if (err) return hollaback(err);
-
-    if ('function' === typeof cursor.toArray) {
-      cursor.toArray(function(err, results) {
-        if (err) return hollaback(err);
-        hollaback(null, results);
-      });
-    } else {
-      hollaback(null, cursor);
-    }
-  };
-};
+import events from 'events';
 
 /**
  * Collection
@@ -49,6 +28,28 @@ export default class Collection {
     };
   }
   /**
+   *  Run Handlers
+   *
+   *  Handles results returned by rethink
+   *
+   *  @private
+   */
+  _handler(hollaback) {
+    return function(err, cursor) {
+      if (err) return hollaback(err);
+
+      if ('function' === typeof cursor.toArray) {
+        cursor.toArray(function(err, results) {
+          if (err) return hollaback(err);
+          hollaback(null, results);
+        });
+      } else {
+        hollaback(null, cursor);
+      }
+
+    };
+  }
+  /**
    * Base query builder
    *
    * this is meant to be used to construct more complex queries
@@ -68,8 +69,8 @@ export default class Collection {
 
     return {
       run: function(conn, hollaback) {
-        return query.run(conn, _handler(hollaback));
-      },
+        return query.run(conn, this._handler(hollaback));
+      }.bind(this),
     };
   }
 
@@ -155,6 +156,20 @@ export default class Collection {
 
     return this.query(function(q) {
       return q.get(id).update(data, {returnChanges: true});
+    });
+  }
+
+  /**
+   *  Delete the given record
+   *
+   *  builds a `r.table(<table-name>).get(<id>).delete()` query
+   *
+   *  @param { Object } id - The id to delete
+   *  @return { Object }
+   */
+  delete(id) {
+    return this.query(function(q) {
+      return q.get(id).delete();
     });
   }
 }

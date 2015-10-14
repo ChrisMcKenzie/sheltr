@@ -9,7 +9,7 @@ import expressJwt from 'express-jwt';
 import UsersCollection from './users';
 import OrganizationsCollection from './organizations';
 
-let key = fs.readFileSync(path.normalize((config.jwt.secretPath)));
+let key = fs.readFileSync(path.normalize((config.get('jwt:secretPath'))));
 let Users = new UsersCollection();
 let Organizations = new OrganizationsCollection();
 
@@ -23,6 +23,11 @@ export function login(req, res, next) {
   Users.getByEmail(req.body.email.toLowerCase())
     .run(req._rdbConn, function(err, results) {
       if (err) {
+        next({status: 401, message: 'Wrong user or password'});
+        return;
+      }
+
+      if (results.length <= 0) {
         next({status: 401, message: 'Wrong user or password'});
         return;
       }

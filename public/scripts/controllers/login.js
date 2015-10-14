@@ -11,14 +11,17 @@ angular.module(MODULE, [])
     '$auth',
     '$location',
     '$stateParams',
-    function($scope, $http, $auth, $location, $stateParams) {
+    '$mdToast',
+    function($scope, $http, $auth, $location, $stateParams, $mdToast) {
       $scope.login = function() {
         $auth.login($scope.user)
           .then(function() {
             $location.path('/');
           })
           .catch(function(response) {
-            console.error(response);
+            $mdToast.show(
+              $mdToast.simple().content(response.data.message)
+            );
           });
       };
     },

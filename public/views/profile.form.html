@@ -1,0 +1,46 @@
+<md-dialog aria-label="Create New User" ng-cloak>
+  <form name="userForm">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Create User</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon aria-label="Close dialog"> clear </md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content style="min-width:450px;min-height:300px; ">
+    <div class="md-dialog-content">
+      <md-input-container>
+        <label>Full Name</label>
+        <input id="fullName" name="fullName" ng-model="user.name" required autocomplete="fullname">
+        <div ng-messages="userForm.fullName.$error" ng-show="userForm.fullName.$dirty">
+          <div ng-message="required">This is required!</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Email</label>
+        <input name="userEmail" type="email" ng-model="user.email" required autocomplete="userEmail">
+        <div ng-messages="userForm.userEmail.$error" ng-show="userForm.userEmail.$dirty">
+          <div ng-message="required">This is required!</div>
+          <div ng-message="email">This is not a valid email</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input name="userPassword" type="password" ng-model="user.password" required minlength="5">
+        <div ng-messages="userForm.userPassword.$error" ng-show="userForm.userPassword.$dirty">
+          <div ng-message="required">This is required!</div>
+          <div ng-message="minlength">Password must be atleast 5 characters long</div>
+        </div>
+      </md-input-container>
+      <md-checkbox ng-model="user.admin" aria-label="Admin">Is this user an Admin?</md-checkbox>
+    </div>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <md-button ng-click="createUser()">
+      Create
+    </md-button>
+  </div>
+  </form>
+</md-dialog>

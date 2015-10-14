@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 
 import routes from './routes/index';
 import api from './routes/api';
+import * as plugin from './plugin';
 
 db.setup();
 
@@ -54,5 +55,6 @@ app.use((err, req, res, next) => {
   });
 });
 
+plugin.load();
 
 module.exports = app;

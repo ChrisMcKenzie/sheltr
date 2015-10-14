@@ -10,9 +10,9 @@ var logerror = require('debug')('sheltr:rdb:error');
 
 export function connect(hollaback) {
   r.connect({
-    host: config.db.host,
-    port: config.db.port,
-    db: config.db.name,
+    host: config.get('db:host'),
+    port: config.get('db:port'),
+    db: config.get('db:name'),
   }, function(err, result) {
     if (err) {
       logerror('[ERROR] RethinkDB database is not available');
@@ -27,11 +27,11 @@ export function connect(hollaback) {
 export function setup(cb) {
   connect(function(err, connection) {
     function createTable(tbl) {
-      var primary = config.db.tables[tbl];
+      var primary = config.get('db:tables')[tbl];
       var secondary;
 
       function createIndex(indexName) {
-        r.db(config.db.name)
+        r.db(config.get('db:name'))
          .table(tbl).indexCreate(indexName, r.row(secondary[indexName]))
          .run(connection, function(err, result) {
           if (err) {
@@ -49,12 +49,12 @@ export function setup(cb) {
         });
       }
 
-      if (typeof config.db.tables[tbl] === 'object') {
-        primary = config.db.tables[tbl].primary || 'id';
-        secondary = config.db.tables[tbl].secondary || null;
+      if (typeof config.get('db:tables')[tbl] === 'object') {
+        primary = config.get('db:tables')[tbl].primary || 'id';
+        secondary = config.get('db:tables')[tbl].secondary || null;
       }
 
-      r.db(config.db.name)
+      r.db(config.get('db:name'))
        .tableCreate(tbl, {primaryKey: primary})
        .run(connection, function(err, result) {
         if (err) {
@@ -79,21 +79,22 @@ export function setup(cb) {
     }
 
     assert.ok(err === null, err);
-    r.dbCreate(config.db.name).run(connection, function(err, result) {
+    r.dbCreate(config.get('db:name')).run(connection, function(err, result) {
       if (err) {
         logdebug(
           '[DEBUG] RethinkDB database "%s" \
           already exists (%s:%s)\n%s',
-          config.db.name,
+          config.get('db:name'),
           err.name,
           err.msg,
           err.message
         );
       } else {
-        logdebug('[INFO ] RethinkDB database "%s" created', config.db.name);
+        logdebug('[INFO ] RethinkDB database "%s" created',
+                 config.get('db:name'));
       }
 
-      for (var tbl in config.db.tables) {
+      for (var tbl in config.get('db:tables')) {
         createTable(tbl);
       }
 

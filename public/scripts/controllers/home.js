@@ -6,9 +6,10 @@ angular.module(MODULE, [])
   .controller('HomeController', [
     '$scope',
     '$state',
+    '$mdDialog',
     'Applicants',
     'Account',
-    function($scope, $state, Applicants, Account) {
+    function($scope, $state, $mdDialog, Applicants, Account) {
       $scope.seekers = [];
 
       Account.getProfile().then(function(response) {

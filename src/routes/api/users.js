@@ -1,4 +1,5 @@
 import express from 'express';
+import {events} from '../../events';
 import UsersCollection from '../../users';
 import password from '../../password';
 import {OrgListFilter, OrgSingleFilter} from './filters';
@@ -18,6 +19,7 @@ function createUser(req, res) {
     delete result.password;
 
     res.status(201).send(result);
+    events.emit('users::create', result);
   });
 }
 
@@ -42,6 +44,15 @@ router.get('/me', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   Users.getById(req.params.id, OrgSingleFilter(req.user.organizationId))
+  .run(req._rdbConn, (err, result) => {
+    if (err) return next(err);
+
+    res.status(200).send(result);
+  });
+});
+
+router.delete('/:id', (req, res, next) => {
+  Users.delete(req.params.id)
   .run(req._rdbConn, (err, result) => {
     if (err) return next(err);
 
