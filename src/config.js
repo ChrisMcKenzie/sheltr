@@ -11,7 +11,7 @@ nconf
 nconf.defaults({
   env: process.env.NODE_ENV || 'development',
   jwt: {
-    secretPath: process.env.HOME + '/.ssh/id_rsa.pub',
+    secret: 'kittens are fluffy',
   },
   db: {
     host: 'localhost',

@@ -9,7 +9,7 @@ import expressJwt from 'express-jwt';
 import UsersCollection from './users';
 import OrganizationsCollection from './organizations';
 
-let key = fs.readFileSync(path.normalize((config.get('jwt:secretPath'))));
+let key = config.get('jwt:secret');
 let Users = new UsersCollection();
 let Organizations = new OrganizationsCollection();
 
@@ -46,7 +46,7 @@ export function login(req, res, next) {
         }
 
         // We are sending the profile inside the token
-        var token = jwt.sign(profile, key, { expiresInMinutes: 60 * 5 });
+        var token = jwt.sign(profile, key, { expiresIn: 60 * 60 * 5 });
 
         res.json({ token: token });
       });
