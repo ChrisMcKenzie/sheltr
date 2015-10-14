@@ -30,6 +30,7 @@ gulp.task('dist', function(done) {
     'server:compile',
     ['frontend:copy', 'frontend:sass', 'frontend:browserify'],
     'docker:build',
+    'docker:deploy',
     done
   );
 });

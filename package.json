@@ -57,6 +57,6 @@
     "run-sequence": "^1.1.2",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
-    "yargs": "^3.18.0"
+    "yargs": "^3.27.0"
   }
 }

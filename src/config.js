@@ -1,9 +1,12 @@
 'use strict';
 import nconf from 'nconf';
 
-nconf.argv()
-  .env()
-  .file({ file: __dirname + '/config.json' });
+nconf
+  .argv()
+  .env({
+    separator: '_',
+    lowerCase: true,
+  });
 
 nconf.defaults({
   env: process.env.NODE_ENV || 'development',
@@ -35,5 +38,6 @@ nconf.defaults({
     },
   },
 });
+
 
 export default nconf;
