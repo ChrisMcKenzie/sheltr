@@ -4,8 +4,8 @@ import Keen from 'keen-js';
 
 export function register() {
   var client = new Keen({
-    projectId: config.get('plugins:keen:projectId'),
-    writeKey: config.get('plugins:keen:writeKey'),
+    projectId: config.get('plugins:keen:projectid'),
+    writeKey: config.get('plugins:keen:writekey'),
   });
 
   events.onAny(function(val) {
@@ -18,8 +18,8 @@ export function register() {
 }
 
 export function isEnabled() {
-  return typeof config.get('plugins:keen:projectId') !== 'undefined' &&
-    typeof config.get('plugins:keen:writeKey') !== 'undefined';
+  return typeof config.get('plugins:keen:projectid') !== 'undefined' &&
+    typeof config.get('plugins:keen:writekey') !== 'undefined';
 }
 
 export function name() {
