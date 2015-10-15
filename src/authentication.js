@@ -50,7 +50,10 @@ export function login(req, res, next) {
         var token = jwt.sign(profile, key, { expiresIn: 60 * 60 * 5 });
 
         res.json({ token: token });
-        events.emit('user::login', profile);
+        events.emit('user::login', {
+          id: profile.id,
+          organizationId: profile.organizationId,
+        });
       });
     });
 }
