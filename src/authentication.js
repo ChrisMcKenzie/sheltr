@@ -4,6 +4,7 @@ import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 import config from './config';
+import {events} from './events';
 import password from './password';
 import expressJwt from 'express-jwt';
 import UsersCollection from './users';
@@ -49,6 +50,7 @@ export function login(req, res, next) {
         var token = jwt.sign(profile, key, { expiresIn: 60 * 60 * 5 });
 
         res.json({ token: token });
+        events.emit('user::login', profile);
       });
     });
 }
