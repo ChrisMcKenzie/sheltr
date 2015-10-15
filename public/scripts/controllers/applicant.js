@@ -16,8 +16,22 @@ angular.module(MODULE, ['ngMaterial'])
       $scope.hideTags = false;
       $scope.task = 'update';
 
+      $scope.deleteApplicant = function() {
+        $http.delete(`/api/applicants/${id}`)
+          .then(function(response) {
+            $mdToast.show(
+              $mdToast.simple().content('Successfully deleted application.')
+            );
+          })
+          .catch(function(response) {
+            $mdToast.show(
+              $mdToast.simple().content('Unable to delete application.')
+            );
+          });
+      };
+
       $scope.submit = function() {
-        $http.patch(`/api/applicants/${id}`, $scope.applicant)
+        $http.patch('/api/applicants/' + id, $scope.applicant)
           .then(function(response) {
             $mdToast.show(
               $mdToast.simple().content('Applicant successfully updated.')

@@ -12,6 +12,10 @@ function matchesFilter(row) {
   }));
 }
 
+function notArchived(q) {
+  return q.filter(r.row('status').ne('archived'));
+}
+
 function getMatchesCount(q) {
   return q.map(function(row) {
     return row.merge({
@@ -43,7 +47,7 @@ export default class Applicants extends Collection {
   }
 
   filter(params) {
-    return super.filter(params, getMatchesCount);
+    return super.filter(params, notArchived, getMatchesCount);
   }
 
   getById(id) {
@@ -51,12 +55,16 @@ export default class Applicants extends Collection {
   }
 
   update(id, applicant) {
-    applicant.dob = new Date(applicant.dob);
+    if (typeof applicant.dob !== 'undefined') {
+      applicant.dob = new Date(applicant.dob);
+    }
     return super.update(id, applicant);
   }
 
   insert(applicant) {
-    applicant.dob = new Date(applicant.dob);
+    if (typeof applicant.dob !== 'undefined') {
+      applicant.dob = new Date(applicant.dob);
+    }
     return super.insert(applicant);
   }
 }

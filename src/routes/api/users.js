@@ -2,6 +2,7 @@ import express from 'express';
 import {events} from '../../events';
 import UsersCollection from '../../users';
 import password from '../../password';
+import {isAuthorized} from '../../authentication';
 import {OrgListFilter, OrgSingleFilter} from './filters';
 
 let router = express.Router();
@@ -24,7 +25,7 @@ function createUser(req, res) {
 }
 
 /* GET applicants listing. */
-router.get('/', (req, res, next) => {
+router.get('/', isAuthorized('admin'), (req, res, next) => {
   Users.filter(req.query, OrgListFilter(req.user.organizationId))
   .run(req._rdbConn, (err, result) => {
     if (err) return next(err);
@@ -51,7 +52,7 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', isAuthorized('admin'), (req, res, next) => {
   Users.delete(req.params.id)
   .run(req._rdbConn, (err, result) => {
     if (err) return next(err);
@@ -60,7 +61,7 @@ router.delete('/:id', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', isAuthorized('admin'), (req, res, next) => {
   if (!req.body.password || !req.body.email) {
     return next(new Error('email and password are required'));
   }

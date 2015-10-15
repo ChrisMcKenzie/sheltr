@@ -52,3 +52,16 @@ export function login(req, res, next) {
       });
     });
 }
+
+export function isAuthorized(permission) {
+  return function(req, res, next) {
+    if (!req.user[permission]) {
+      return next({
+        status: 401,
+        message: 'you do not have permission to perform this action.',
+      });
+    }
+
+    return next();
+  };
+}

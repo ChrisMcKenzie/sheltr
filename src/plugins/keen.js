@@ -18,8 +18,8 @@ export function register() {
 }
 
 export function isEnabled() {
-  return config.get('plugins:keen:projectId') !== '' &&
-    config.get('plugins:keen:writeKey') !== '';
+  return typeof config.get('plugins:keen:projectId') !== 'undefined' &&
+    typeof config.get('plugins:keen:writeKey') !== 'undefined';
 }
 
 export function name() {

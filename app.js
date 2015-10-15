@@ -1,3 +1,4 @@
+import 'source-map-support/register';
 import debug from 'debug';
 import app from './src/webserver';
 

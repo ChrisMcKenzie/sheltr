@@ -5,7 +5,7 @@ import users from './users';
 import * as db from '../../db';
 import express from 'express';
 import applicants from './applicants';
-import org from './organizations';
+import * as org from './organizations';
 import bodyParser from 'body-parser';
 import * as auth from '../../authentication';
 
@@ -19,6 +19,7 @@ router.use(auth.authenticate);
 
 router.use('/applicants', applicants);
 router.use('/users', users);
-router.use('/organization', org);
+router.use('/organization', org.getForUser);
+router.use('/organizations', auth.isAuthorized('superAdmin'), org.Admin);
 
 module.exports = router;

@@ -61,15 +61,17 @@ angular.module('sheltrApp', [
         return deferred.promise;
       }
 
-      function adminRequired($q, $location, $auth) {
-        var deferred = $q.defer();
-        var payload = $auth.getPayload();
-        if (payload.admin) {
-          deferred.resolve();
-        } else {
-          $location.path('/');
-        }
-        return deferred.promise;
+      function isAuthorized(permission) {
+        return function($q, $location, $auth) {
+          var deferred = $q.defer();
+          var payload = $auth.getPayload();
+          if (payload[permission]) {
+            deferred.resolve();
+          } else {
+            $location.path('/');
+          }
+          return deferred.promise;
+        };
       }
 
       $stateProvider
@@ -123,7 +125,7 @@ angular.module('sheltrApp', [
           templateUrl: 'views/org.view.html',
           controller: 'OrgController',
           resolve: {
-            adminRequired: adminRequired,
+            adminRequired: isAuthorized('admin'),
           },
         });
     },
