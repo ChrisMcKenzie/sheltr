@@ -19,6 +19,7 @@ angular.module(MODULE, ['ngMaterial'])
         type: type,
         filters: {},
         addresses: [{}],
+        status: 'new',
       };
 
       $scope.addAddy = function() {
@@ -55,7 +56,7 @@ angular.module(MODULE, ['ngMaterial'])
       $scope.submit = function() {
         $http.post('/api/applicants', $scope.applicant)
           .then(function(response) {
-            $state.go('home');
+            $mdToast.simple().content('Successfully created application.');
           },
           function(response) {
             $mdToast.show(

@@ -374,7 +374,7 @@
   <footer class="horizontal-reverse layout">
     <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="{{task}}">
     <span flex></span>
-    <a class="mdl-button mdl-js-button" ng-click="deleteApplicant()">Delete</a>
+    <a ng-hide="!!hideTags" class="mdl-button mdl-js-button" ng-click="deleteApplicant()">Delete</a>
   </footer>
 </form>
 
